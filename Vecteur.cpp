@@ -3,6 +3,7 @@
 
 Vecteur::Vecteur(): x(0.) , y(0.) {};
 Vecteur::Vecteur(double x_, double y_): x(x_), y(y_) {};
+Vecteur::Vecteur(const Vecteur & vect): x(vect.x), y(vect.y) {};
 
 double Vecteur::x_ () const {
   return x;
