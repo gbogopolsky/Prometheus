@@ -4,7 +4,12 @@
 #include <SFML/Graphics.hpp>
 
 Objet::Objet (): position() , position_precedente() , acceleration () {};
-//Objet::Objet (Vecteur posisiton_, Vecteur position_precedente_, Vecteur acceleration_): position(position_) , position_precedente(position_precedente_) , acceleration(acceleration_) {};
+
+Objet::Objet (const Vecteur position_, const Vecteur position_precedente_, const Vecteur acceleration_) {
+  position = position_;
+  position_precedente = position_precedente_;
+  acceleration = acceleration_;
+}
 
 void Objet::Acceleration () {
   acceleration = Vecteur(0.,0.);
