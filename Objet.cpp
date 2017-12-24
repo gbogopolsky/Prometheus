@@ -5,34 +5,29 @@
 
 Objet::Objet (): position() , position_precedente() , acceleration () {};
 //Objet::Objet (Vecteur posisiton_, Vecteur position_precedente_, Vecteur acceleration_): position(position_) , position_precedente(position_precedente_) , acceleration(acceleration_) {};
-void Objet::Acceleration ()
-{
+
+void Objet::Acceleration () {
   acceleration = Vecteur(0.,0.);
   Vecteur input;
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-  {
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
     input = Vecteur(0.1,0.);
     acceleration += input;
   }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-  {
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
     input = Vecteur(0.1,0.);
     acceleration -= input;
   }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-  {
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
     input = Vecteur(0.,0.1);
     acceleration += input;
   }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-  {
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
     input = Vecteur(0.,0.1);
     acceleration -= input;
   }
 }
 
-void Objet::Eulerposition()
-{
+void Objet::Eulerposition() {
   Vecteur position_;
   position_ = position;
   //std::cout << acceleration.x_() << std::endl;
@@ -41,18 +36,15 @@ void Objet::Eulerposition()
   position_precedente = position_;
 }
 
-Vecteur Objet::position_() const
-{
+Vecteur Objet::position_() const {
   return (position);
 }
 
-double Objet::x_ () const
-{
+double Objet::x_ () const {
   return (position.x_());
 }
 
-double Objet::y_ () const
-{
+double Objet::y_ () const {
   return (position.y_());
 }
 
