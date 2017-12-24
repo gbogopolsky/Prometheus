@@ -38,7 +38,7 @@ int main()
     //Vaisseau.affiche_acceleration_x(Vaisseau.acceleration_x());
     //Vaisseau.affiche_acceleration_y(Vaisseau.acceleration_y());
 
-    Vaisseau.Eulerposisiton();
+    Vaisseau.Eulerposition();
     Prometheus.move(Vaisseau.x_(), Vaisseau.y_());
     window.draw(Prometheus);
 

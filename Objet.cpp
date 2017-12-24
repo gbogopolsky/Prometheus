@@ -31,7 +31,7 @@ void Objet::Acceleration ()
   }
 }
 
-void Objet::Eulerposisiton()
+void Objet::Eulerposition()
 {
   Vecteur position_;
   position_ = position;

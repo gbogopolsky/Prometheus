@@ -8,7 +8,7 @@ public:
   Objet();
   Objet(Vecteur position_, Vecteur position_precedente_, Vecteur acceleration_);
   void Acceleration ();
-  void Eulerposisiton ();
+  void Eulerposition ();
   Vecteur position_ () const;
   double x_ () const;
   double y_ () const;
