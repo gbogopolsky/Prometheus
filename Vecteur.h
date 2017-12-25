@@ -7,8 +7,8 @@ public:
   Vecteur(double x_, double y_);
   Vecteur(const Vecteur &);
 
-  double get_x() const;
-  double get_y() const;
+  double x_() const;
+  double y_() const;
 
   Vecteur & operator += (const Vecteur & vecteur_);
   Vecteur & operator -= (const Vecteur & vecteur_);
