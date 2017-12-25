@@ -6,7 +6,7 @@
 class Objet {
 public:
   Objet();
-  Objet(Vecteur position_, Vecteur position_precedente_, Vecteur acceleration_);
+  Objet(Vecteur position_, Vecteur position_precedente_, Vecteur acceleration_, Vecteur vitesse_, Vecteur vitesse_precedente_);
 
   void Acceleration ();
   void Eulerposition ();
@@ -25,6 +25,8 @@ private:
   Vecteur position;
   Vecteur position_precedente;
   Vecteur acceleration;
+  Vecteur vitesse;
+  Vecteur vitesse_precedente;
 
 };
 
