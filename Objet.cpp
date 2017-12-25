@@ -30,13 +30,15 @@ void Objet::Acceleration () {
   }
 }
 
-void Objet::Eulerposition() {
-  Vecteur position_;
-  position_ = position;
+void Objet::Euler(double dTime) {
+  // Vecteur position_ = position;
+  // Vecteur vitesse_ = vitesse;
   //std::cout << acceleration.x_() << std::endl;
   //std::cout << acceleration.y_() << std::endl;
-  position = 0.5*0.5*acceleration + 2*position - position_precedente;
-  position_precedente = position_;
+  vitesse = vitesse + dTime*acceleration;
+  position = position + dTime*vitesse + 0.5*dTime*dTime*acceleration;
+  // position_precedente = position_;
+  // vitesse_precedente = vitesse_;
 }
 
 Vecteur Objet::position_() const {

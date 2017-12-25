@@ -9,7 +9,7 @@ public:
   Objet(Vecteur position_, Vecteur position_precedente_, Vecteur acceleration_, Vecteur vitesse_, Vecteur vitesse_precedente_);
 
   void Acceleration ();
-  void Eulerposition ();
+  void Euler (double dTime);
 
   Vecteur position_ () const;
   double x_ () const;
@@ -17,7 +17,7 @@ public:
   //Vecteur acceleration_ () const;
   double acceleration_x () const;
   double acceleration_y () const;
-  
+
   void affiche_acceleration_x (double x);
   void affiche_acceleration_y (double y);
 

@@ -12,7 +12,8 @@ int main() {
   //creation du système
   Objet Vaisseau;
   //temps d'une boucle (fps)
-  sf::Time time = sf::milliseconds(60);
+  sf::Time time = sf::milliseconds(10);
+  double dTime = 0.010;
   // création de la fenêtre
   window.create(sf::VideoMode(800, 600), "My window");
   Prometheus.setFillColor(sf::Color(100, 250, 50));
@@ -35,7 +36,7 @@ int main() {
     //Vaisseau.affiche_acceleration_x(Vaisseau.acceleration_x());
     //Vaisseau.affiche_acceleration_y(Vaisseau.acceleration_y());
 
-    Vaisseau.Eulerposition();
+    Vaisseau.Euler(dTime);
     Prometheus.move(Vaisseau.x_(), Vaisseau.y_());
     window.draw(Prometheus);
 
