@@ -1,6 +1,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+#include <iostream>
 
 #include "Vecteur.h"
 #include "Objet.h"
@@ -35,6 +36,8 @@ int main() {
 
     //Vaisseau.affiche_acceleration_x(Vaisseau.acceleration_x());
     //Vaisseau.affiche_acceleration_y(Vaisseau.acceleration_y());
+    std::cout << Vaisseau.acceleration_x() << "|" << Vaisseau.vitesse_x() << "|" << Vaisseau.x_() << std::endl;
+    std::cout << Vaisseau.acceleration_y() << "|" << Vaisseau.vitesse_y() << "|" << Vaisseau.y_() << std::endl;
 
     Vaisseau.Euler(dTime);
     Prometheus.move(Vaisseau.x_(), Vaisseau.y_());
