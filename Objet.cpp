@@ -53,6 +53,14 @@ double Objet::y_ () const {
   return (position.y_());
 }
 
+double Objet::vitesse_x () const {
+  return vitesse.x_();
+}
+
+double Objet::vitesse_y () const {
+  return vitesse.y_();
+}
+
 double Objet::acceleration_x () const {
   return acceleration.x_();
 }

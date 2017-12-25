@@ -15,6 +15,8 @@ public:
   double x_ () const;
   double y_ () const;
   //Vecteur acceleration_ () const;
+  double vitesse_x () const;
+  double vitesse_y () const;
   double acceleration_x () const;
   double acceleration_y () const;
 
