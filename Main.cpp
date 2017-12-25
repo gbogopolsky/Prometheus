@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <iostream>
+#include <fstream>
 
 #include "Vecteur.h"
 #include "Objet.h"
@@ -12,6 +13,10 @@ sf::CircleShape Prometheus(15);
 int main() {
   //creation du système
   Objet Vaisseau;
+  //création d'un fichier de sortie des données et d'un compteur d'itérations
+  std::ofstream outfile;
+  outfile.open("vaisseau.dat");
+  int iterations = 0;
   //temps d'une boucle (fps)
   sf::Time time = sf::milliseconds(10);
   double dTime = 0.010;
@@ -36,8 +41,7 @@ int main() {
 
     //Vaisseau.affiche_acceleration_x(Vaisseau.acceleration_x());
     //Vaisseau.affiche_acceleration_y(Vaisseau.acceleration_y());
-    std::cout << Vaisseau.acceleration_x() << "|" << Vaisseau.vitesse_x() << "|" << Vaisseau.x_() << std::endl;
-    std::cout << Vaisseau.acceleration_y() << "|" << Vaisseau.vitesse_y() << "|" << Vaisseau.y_() << std::endl;
+    outfile << iterations << " " << Vaisseau.acceleration_x() << " " << Vaisseau.acceleration_y() << " " << Vaisseau.vitesse_x() << " "  << Vaisseau.vitesse_y() << " " << Vaisseau.x_() << " " << Vaisseau.y_() << std::endl;
 
     Vaisseau.Euler(dTime);
     Prometheus.move(Vaisseau.x_(), Vaisseau.y_());
@@ -45,8 +49,10 @@ int main() {
 
     // c'est ici qu'on dessine tout
       // fin de la frame courante, affichage de tout ce qu'on a dessiné
+    iterations += 1;
     window.display();
     sf::sleep(time - clock.getElapsedTime());
   }
+  outfile.close();
   return 0;
 }
