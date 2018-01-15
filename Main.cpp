@@ -44,7 +44,7 @@ int main() {
     outfile << iterations << " " << Vaisseau.acceleration_x() << " " << Vaisseau.acceleration_y() << " " << Vaisseau.vitesse_x() << " "  << Vaisseau.vitesse_y() << " " << Vaisseau.x_() << " " << Vaisseau.y_() << std::endl;
 
     Vaisseau.Euler(dTime);
-    Prometheus.move(Vaisseau.x_(), Vaisseau.y_());
+    Prometheus.setPosition(Vaisseau.x_(), Vaisseau.y_());
     window.draw(Prometheus);
 
     // c'est ici qu'on dessine tout
