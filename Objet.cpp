@@ -3,7 +3,7 @@
 #include "Objet.h"
 #include <SFML/Graphics.hpp>
 
-Objet::Objet (): position() , position_precedente() , acceleration(), vitesse(), vitesse_precedente() {};
+Objet::Objet (): position() , position_precedente() , acceleration(), vitesse(), vitesse_precedente() {}
 
 Objet::Objet (Vecteur position_,Vecteur position_precedente_, Vecteur acceleration_, Vecteur vitesse_, Vecteur vitesse_precedente_) {
   position = position_;
