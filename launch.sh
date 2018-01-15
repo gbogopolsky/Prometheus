@@ -1,16 +1,15 @@
-# Un fichier pour compiler et exécuter le programme
-# Il contient des lignes de commandes à la suite qu'il va effectuer.
+# Un fichier pour compiler et exï¿½cuter le programme
+# Il contient des lignes de commandes ï¿½ la suite qu'il va effectuer.
 #
-# Pour le rendre exécutable, il suffit de taper : 
+# Pour le rendre exï¿½cutable, il suffit de taper :
 # chmod +x launch.sh
-# 
-# Puis de l'exécuter avec : 
+#
+# Puis de l'exï¿½cuter avec :
 # ./launch.sh
 #
-# Voilà ;)
+# Voilï¿½ ;)
 
 g++ -c Main.cpp Vecteur.cpp Objet.cpp
 g++ Main.o Objet.o Vecteur.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
-rm Main.o Objet.o Vecteur.o
+#rm Main.o Objet.o Vecteur.o
 ./sfml-app
-
