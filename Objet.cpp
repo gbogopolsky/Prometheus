@@ -14,19 +14,19 @@ Objet::Objet (Vecteur position_,Vecteur position_precedente_, Vecteur accelerati
 }
 
 void Objet::Acceleration () {
-  acceleration = Vecteur(0.,0.);
+  acceleration = Vecteur();
 
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-    acceleration += Vecteur(0.1, 0.);
+    acceleration += Vecteur(100.0, 0.);
   }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-    acceleration -= Vecteur(0.1, 0.);
+    acceleration -= Vecteur(100.0, 0.);
   }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-    acceleration += Vecteur(0., 0.1);
+    acceleration += Vecteur(0., 100.0);
   }
   if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-    acceleration -= Vecteur(0., 0.1);
+    acceleration -= Vecteur(0., 100.0);
   }
 }
 
