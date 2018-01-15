@@ -9,7 +9,7 @@ v_x = sortie[:,3]
 v_y = sortie[:,4]
 x = sortie[:,5]
 y = sortie[:,6]
-
+blabla
 fig = plt.figure()
 
 plt.subplot(311)
