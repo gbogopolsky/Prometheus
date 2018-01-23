@@ -5,7 +5,7 @@ class Vecteur {
 public:
   Vecteur();
   Vecteur(double x_, double y_);
-  Vecteur(const Vecteur &);
+  Vecteur(const Vecteur & vect);
 
   double x_() const;
   double y_() const;
