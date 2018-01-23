@@ -1,78 +1,36 @@
 #include <iostream>
-#include "Vecteur.h"
+#include <cmath>
 #include "Objet.h"
-#include <SFML/Graphics.hpp>
+#include "Vecteur.h"
 
-Objet::Objet (): position() , position_precedente() , acceleration(), vitesse(), vitesse_precedente() {}
+Objet::Objet () :
+  acceleration(),
+  vitesse(),
+  position(),
+  masse (1.0) {}
 
-Objet::Objet (Vecteur position_,Vecteur position_precedente_, Vecteur acceleration_, Vecteur vitesse_, Vecteur vitesse_precedente_) {
-  position = position_;
-  position_precedente = position_precedente_;
-  acceleration = acceleration_;
-  vitesse = vitesse_;
-  vitesse_precedente = vitesse_precedente_;
+Objet::Objet (const Vecteur acceleration_, const Vecteur vitesse_, const Vecteur position_, const double masse_) :
+  acceleration (acceleration_),
+  vitesse (vitesse_),
+  position (position_),
+  masse (masse_) {}
+
+Vecteur Objet::position_ () const {
+  return position;
 }
 
-void Objet::Acceleration () {
-  acceleration = Vecteur();
-
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-    acceleration += Vecteur(100.0, 0.);
-  }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-    acceleration -= Vecteur(100.0, 0.);
-  }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-    acceleration += Vecteur(0., 100.0);
-  }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-    acceleration -= Vecteur(0., 100.0);
-  }
+double Objet::masse_ () const {
+  return masse;
 }
 
-void Objet::Euler(double dTime) {
-  // Vecteur position_ = position;
-  // Vecteur vitesse_ = vitesse;
-  //std::cout << acceleration.x_() << std::endl;
-  //std::cout << acceleration.y_() << std::endl;
-  vitesse = vitesse + dTime*acceleration;
-  position = position + dTime*vitesse + 0.5*dTime*dTime*acceleration;
-  // position_precedente = position_;
-  // vitesse_precedente = vitesse_;
+double Objet::Distance (const Objet & Objet1, const Objet & Objet2) {
+  return (sqrt( (Objet2.position_().x_() - Objet1.position_().x_()) + (Objet2.position_().y_() - Objet1.position_().y_()) ));
 }
 
-Vecteur Objet::position_() const {
-  return (position);
-}
-
-double Objet::x_ () const {
-  return (position.x_());
-}
-
-double Objet::y_ () const {
-  return (position.y_());
-}
-
-double Objet::vitesse_x () const {
-  return vitesse.x_();
-}
-
-double Objet::vitesse_y () const {
-  return vitesse.y_();
-}
-
-double Objet::acceleration_x () const {
-  return acceleration.x_();
-}
-
-double Objet::acceleration_y () const {
-  return acceleration.y_();
-}
-
-void Objet::affiche_acceleration_x (double x) {
-  std::cout << x << std::endl;
-}
-
-void Objet::affiche_acceleration_y (double y) {
-  std::cout << y << std::endl;
+void Objet::RK4 (const double h, const Objet & Objet1, const Objet & Objet2) {
+  Vecteur k1, k2, k3;
+  k1 = acceleration / Objet1.masse_() - Objet2.const_gravitationnelle_() * Objet2.masse_() / pow(Distance(Objet1, Objet2), 3) * (Objet2.position_() - Objet1.position_());
+  k2 = acceleration / Objet1.masse_() - Objet2.const_gravitationnelle_() * Objet2.masse_() / pow(Distance(Objet1, Objet2), 3) * (Objet2.position_() - Objet1.position_());
+  k3 = acceleration / Objet1.masse_() - Objet2.const_gravitationnelle_() * Objet2.masse_() / pow(Distance(Objet1, Objet2), 3) * (Objet2.position_() - Objet1.position_() - h * h / 4 * k1);
+  Objet1.position_() += h * h / 6 * (k1 + k2 + k3);
 }

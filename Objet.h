@@ -2,34 +2,23 @@
 #define Objet_h
 #include "Vecteur.h"
 
-
 class Objet {
 public:
-  Objet();
-  Objet(Vecteur position_, Vecteur position_precedente_, Vecteur acceleration_, Vecteur vitesse_, Vecteur vitesse_precedente_);
-
-  void Acceleration ();
-  void Euler (double dTime);
+  Objet ();
+  Objet (const Vecteur acceleration_, const Vecteur vitesse_, const Vecteur position_, const double masse_);
 
   Vecteur position_ () const;
-  double x_ () const;
-  double y_ () const;
-  //Vecteur acceleration_ () const;
-  double vitesse_x () const;
-  double vitesse_y () const;
-  double acceleration_x () const;
-  double acceleration_y () const;
+  double masse_ () const;
+  virtual double const_gravitationnelle_ () const;
 
-  void affiche_acceleration_x (double x);
-  void affiche_acceleration_y (double y);
+  double Distance (const Objet & Objet1, const Objet & Objet2);
+  void RK4 (const double h, const Objet & Objet1, const Objet & Objet2);
 
-private:
-  Vecteur position;
-  Vecteur position_precedente;
+protected:
   Vecteur acceleration;
   Vecteur vitesse;
-  Vecteur vitesse_precedente;
-
+  Vecteur position;
+  double masse;
 };
 
 #endif
