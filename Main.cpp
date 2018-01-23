@@ -12,12 +12,14 @@
 sf::RenderWindow window;
 sf::CircleShape Ship(15);
 sf::CircleShape Mars(50);
+sf::CircleShape Lune(10);
 
 int main() {
 
   //creation du système
-  Vaisseau Prometheus(30., 10., 8., 8., Vecteur(), Vecteur(), Vecteur (), 10.);
-  CorpsStellaire Planete(9.88, 200., Vecteur(), Vecteur(), Vecteur(110,250), 300000);
+  Vaisseau Prometheus(50., 50., 50., 50., Vecteur(), Vecteur(), Vecteur (), 1.,1.);
+  CorpsStellaire Planete(9.3, 200000., Vecteur(), Vecteur(), Vecteur(110,250), 300000.);
+  CorpsStellaire Satellite(9.3, 10000., Vecteur(), Vecteur(), Vecteur(400,500), 3000.);
 
   //création d'un fichier de sortie des données et d'un compteur d'itérations
   std::ofstream outfile;
@@ -26,7 +28,7 @@ int main() {
   sf::Time time = sf::milliseconds(10);
 
   //Variable de RK4
-  double h = 0.010;
+  double h = 0.01;
 
   // création de la fenêtre
   window.create(sf::VideoMode(800, 600), "My window");
@@ -34,6 +36,7 @@ int main() {
   //Couleur des elements
   Ship.setFillColor(sf::Color(100, 250, 50));
   Mars.setFillColor(sf::Color(250,50,100));
+  Lune.setFillColor(sf::Color(250,50,100));
 
   // on fait tourner le programme tant que la fenêtre n'a pas été fermée
   while (window.isOpen()) {
@@ -53,16 +56,20 @@ int main() {
 
     //Calcul
     Prometheus.Input();
-    Prometheus.RK4(h, Prometheus, Planete);
+    std::cout << Prometheus.acceleration_().x_() << std::endl;
+    std::cout << Prometheus.acceleration_().y_() << std::endl;
+    Prometheus.RK4(h, Planete);
 
     //Positionnement
     Ship.setPosition(Prometheus.position_().x_(), Prometheus.position_().y_());
     Mars.setPosition(Planete.position_().x_(), Planete.position_().y_());
+    Lune.setPosition(Satellite.position_().x_(), Satellite.position_().y_());
 
     //Affichage
     window.clear();
     window.draw(Ship);
     window.draw(Mars);
+    window.draw(Lune);
 
     //Iterations
     window.display();
