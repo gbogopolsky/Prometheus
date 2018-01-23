@@ -45,6 +45,10 @@ Vecteur operator * (const double dt_, const Vecteur & vecteur_) {
   return Vecteur(dt_*vecteur_.x_(), dt_*vecteur_.y_());
 }
 
+Vecteur operator / (const Vecteur & vecteur_, const double dt_) {
+  return Vecteur(vecteur_.x_()/dt_, vecteur_.y_()/dt_);
+}
+
 void affiche_x (Vecteur vecteur_) {
   std::cout << vecteur_.x_() << std::endl;
 }
