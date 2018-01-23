@@ -5,20 +5,22 @@
 class Objet {
 public:
   Objet ();
-  Objet (const Vecteur acceleration_, const Vecteur vitesse_, const Vecteur position_, const double masse_);
+  Objet (const double const_gravitationnelle_, const double masse_, const Vecteur acceleration_, const Vecteur vitesse_, const Vecteur position_);
 
   Vecteur position_ () const;
+  Vecteur acceleration_ () const;
   double masse_ () const;
-  virtual double const_gravitationnelle_ () const;
+  double const_gravitationnelle_ () const;
 
-  double Distance (const Objet & Objet1, const Objet & Objet2);
-  void RK4 (const double h, const Objet & Objet1, const Objet & Objet2);
+  double Distance (const Vecteur & Vecteur1, const Vecteur & Vecteur2);
+  void RK4 (const double h, const Objet & Objet2);
 
 protected:
+  double const_gravitationnelle;
+  double masse;
   Vecteur acceleration;
   Vecteur vitesse;
   Vecteur position;
-  double masse;
 };
 
 #endif

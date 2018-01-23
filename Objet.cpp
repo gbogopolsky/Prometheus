@@ -1,36 +1,51 @@
 #include <iostream>
 #include <cmath>
-#include "Objet.h"
 #include "Vecteur.h"
+#include "Objet.h"
+
 
 Objet::Objet () :
+  const_gravitationnelle(),
+  masse(),
   acceleration(),
   vitesse(),
-  position(),
-  masse (1.0) {}
+  position()
+{}
 
-Objet::Objet (const Vecteur acceleration_, const Vecteur vitesse_, const Vecteur position_, const double masse_) :
-  acceleration (acceleration_),
-  vitesse (vitesse_),
-  position (position_),
-  masse (masse_) {}
+Objet::Objet (const double const_gravitationnelle_, const double masse_, const Vecteur acceleration_, const Vecteur vitesse_, const Vecteur position_):
+  const_gravitationnelle(const_gravitationnelle_),
+  masse(masse_),
+  acceleration(acceleration_),
+  vitesse(vitesse_),
+  position(position_)
+{}
 
 Vecteur Objet::position_ () const {
   return position;
+}
+
+Vecteur Objet::acceleration_ () const {
+  return acceleration;
 }
 
 double Objet::masse_ () const {
   return masse;
 }
 
-double Objet::Distance (const Objet & Objet1, const Objet & Objet2) {
-  return (sqrt( (Objet2.position_().x_() - Objet1.position_().x_()) + (Objet2.position_().y_() - Objet1.position_().y_()) ));
+double Objet::const_gravitationnelle_ () const {
+  return const_gravitationnelle;
 }
 
-void Objet::RK4 (const double h, const Objet & Objet1, const Objet & Objet2) {
-  Vecteur k1, k2, k3;
-  k1 = acceleration / Objet1.masse_() - Objet2.const_gravitationnelle_() * Objet2.masse_() / pow(Distance(Objet1, Objet2), 3) * (Objet2.position_() - Objet1.position_());
-  k2 = acceleration / Objet1.masse_() - Objet2.const_gravitationnelle_() * Objet2.masse_() / pow(Distance(Objet1, Objet2), 3) * (Objet2.position_() - Objet1.position_());
-  k3 = acceleration / Objet1.masse_() - Objet2.const_gravitationnelle_() * Objet2.masse_() / pow(Distance(Objet1, Objet2), 3) * (Objet2.position_() - Objet1.position_() - h * h / 4 * k1);
-  Objet1.position_() += h * h / 6 * (k1 + k2 + k3);
+double Objet::Distance (const Vecteur & Vecteur1, const Vecteur & Vecteur2) {
+  return sqrt(pow(Vecteur1.x_() - Vecteur2.x_(),2) + pow((Vecteur1.y_() - Vecteur2.y_()),2));
+}
+
+void Objet::RK4 (const double h, const Objet & Objet2) {
+  Vecteur k1, k2, k3, k4;
+  k1 = acceleration / masse + Objet2.const_gravitationnelle_() * Objet2.masse_() / pow(Distance(Objet2.position_(),position), 3) * (Objet2.position_() - position);
+  k2 = acceleration / masse + Objet2.const_gravitationnelle_() * Objet2.masse_() / pow(Distance(Objet2.position_(),position + h / 2 * vitesse), 3) * (Objet2.position_() - position - h / 2 * vitesse);
+  k3 = acceleration / masse + Objet2.const_gravitationnelle_() * Objet2.masse_() / pow(Distance(Objet2.position_(),(position + h / 2 * vitesse + h * h / 4 * k1)), 3) * (Objet2.position_() - position - h / 2 * vitesse - h * h / 4 * k1);
+  k4 = acceleration / masse + Objet2.const_gravitationnelle_() * Objet2.masse_() / pow(Distance(Objet2.position_(),(position + h * vitesse + h * h / 2 * k2)), 3) * (Objet2.position_() - position - h * vitesse - h * h / 2 * k2);
+  position += h * vitesse + h * h / 6 * (k1 + k2 + k3);
+  vitesse += h / 6 * (k1 + k2 + k3 + k4);
 }
