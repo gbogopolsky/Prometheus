@@ -9,6 +9,8 @@ public:
 
   double x_() const;
   double y_() const;
+  void set_x (double x_);
+  void set_y (double y_);
 
   Vecteur & operator += (const Vecteur & vecteur_);
   Vecteur & operator -= (const Vecteur & vecteur_);

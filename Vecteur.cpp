@@ -13,6 +13,14 @@ double Vecteur::y_ () const {
   return y;
 }
 
+void Vecteur::set_x (double x_) {
+  x = x_;
+}
+
+void Vecteur::set_y (double y_) {
+  y = y_;
+}
+
 Vecteur & Vecteur::operator += (const Vecteur & vecteur_) {
   x += vecteur_.x_();
   y += vecteur_.y_();
