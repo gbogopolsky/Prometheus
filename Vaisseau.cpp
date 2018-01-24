@@ -24,16 +24,16 @@ Vaisseau::Vaisseau (const double prop_arriere_, const double prop_avant_, const 
 void Vaisseau::Input () {
   acceleration = Vecteur(0.,0.);
 
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
     acceleration += Vecteur(prop_lat, 0.);
   }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
     acceleration -= Vecteur(prop_lat,0.);
   }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
     acceleration += Vecteur(0., prop_arriere);
   }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+  if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
     acceleration -= Vecteur(0., prop_avant);
   }
 }
