@@ -12,7 +12,12 @@ public:
   double masse_ () const;
   double const_gravitationnelle_ () const;
 
+  void set_position (Vecteur & Vect_);
+  void set_vitesse (Vecteur & Vect_);
+  void set_acceleration (Vecteur & Vect_); 
+
   double Distance (const Vecteur & Vecteur1, const Vecteur & Vecteur2);
+  void RK4_inertie (const double h);
   void RK4 (const double h, const Objet & Objet2);
 
 protected:
