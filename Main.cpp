@@ -17,10 +17,23 @@ sf::CircleShape Lune(10);
 int main() {
 
   //creation du système
-  Vaisseau Prometheus(50., 50., 50., 50., Vecteur(), Vecteur(), Vecteur (), 1.,1.);
-  CorpsStellaire Planete(9.3, 200000., Vecteur(), Vecteur(), Vecteur(110,250), 300000.);
-  CorpsStellaire Satellite(9.3, 10000., Vecteur(), Vecteur(), Vecteur(400,500), 3000.);
+  Vaisseau Prometheus(50., 50., 50., 10., Vecteur(), Vecteur(), Vecteur (), 1.,1.);
+  CorpsStellaire Planete(9.3, 50., Vecteur(), Vecteur(), Vecteur(110,400), 300000.);
+  CorpsStellaire Satellite(9.3, 10., Vecteur(), Vecteur(), Vecteur(900,600), 3000.);
 
+  //Figures
+  //sf::CircleShape Ship(15);
+  sf::CircleShape Mars(Planete.rayon_());
+  sf::CircleShape Lune(Satellite.rayon_());
+  //Forme du Vaisseau
+  sf::ConvexShape Ship;
+  Ship.setPointCount(5);
+  // define the points
+  Ship.setPoint(0, sf::Vector2f(0, 0));
+  Ship.setPoint(1, sf::Vector2f(40, 20));
+  Ship.setPoint(2, sf::Vector2f(0, 40));
+  Ship.setPoint(3, sf::Vector2f(8, 34));
+  Ship.setPoint(4, sf::Vector2f(8, 6));
   //création d'un fichier de sortie des données et d'un compteur d'itérations
   std::ofstream outfile;
 
@@ -31,7 +44,7 @@ int main() {
   double h = 0.01;
 
   // création de la fenêtre
-  window.create(sf::VideoMode(800, 600), "My window");
+  window.create(sf::VideoMode(1900, 1200), "My window");
 
   //Couleur des elements
   Ship.setFillColor(sf::Color(100, 250, 50));
@@ -56,14 +69,23 @@ int main() {
 
     //Calcul
     Prometheus.Input();
-    std::cout << Prometheus.acceleration_().x_() << std::endl;
-    std::cout << Prometheus.acceleration_().y_() << std::endl;
+    //std::cout << Prometheus.acceleration_().x_() << std::endl;
+    //std::cout << Prometheus.acceleration_().y_() << std::endl;
+    Prometheus.RK4_inertie(h);
     Prometheus.RK4(h, Planete);
+    Prometheus.RK4(h, Satellite);
 
     //Positionnement
-    Ship.setPosition(Prometheus.position_().x_(), Prometheus.position_().y_());
     Mars.setPosition(Planete.position_().x_(), Planete.position_().y_());
     Lune.setPosition(Satellite.position_().x_(), Satellite.position_().y_());
+    //Repositionnement
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+      Vecteur Vect_(0.,0.);
+      Prometheus.set_position(Vect_);
+      Prometheus.set_vitesse(Vect_);
+      Prometheus.set_acceleration(Vect_);
+      Ship.setPosition(0.,0.);
+    };
 
     //Affichage
     window.clear();
