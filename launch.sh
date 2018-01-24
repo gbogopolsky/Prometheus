@@ -9,7 +9,7 @@
 #
 # Voil� ;)
 
-g++ -c Main.cpp Vecteur.cpp Objet.cpp
-g++ Main.o Objet.o Vecteur.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
+g++ -c Main.cpp Vecteur.cpp Objet.cpp CorpsStellaire.cpp Vaisseau.cpp 
+g++ Main.o Objet.o Vecteur.o CorpsStellaire.o Vaisseau.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system
 #rm Main.o Objet.o Vecteur.o
 ./sfml-app
