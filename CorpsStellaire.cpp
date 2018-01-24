@@ -13,3 +13,7 @@ CorpsStellaire::CorpsStellaire (const double const_gravitationnelle_, const doub
   Objet (const_gravitationnelle_, masse_, acceleration_, vitesse_, position_),
   rayon (rayon_)
 {}
+
+double CorpsStellaire::rayon_ () const {
+  return rayon;
+}

@@ -8,6 +8,8 @@ public:
   CorpsStellaire ();
   CorpsStellaire (const double const_gravitationnelle_, const double rayon_, const Vecteur acceleration_, const Vecteur vitesse_, const Vecteur position_, const double masse_);
 
+  double rayon_ () const;
+
 private:
   double rayon;
 };
