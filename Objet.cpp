@@ -1,5 +1,7 @@
+#define CST_G 6,67408e-11
 #include <iostream>
 #include <cmath>
+#include <vector>
 #include "Vecteur.h"
 #include "Objet.h"
 
@@ -52,17 +54,20 @@ double Objet::Distance (const Vecteur & Vecteur1, const Vecteur & Vecteur2) {
   return sqrt(pow(Vecteur1.x_() - Vecteur2.x_(),2) + pow((Vecteur1.y_() - Vecteur2.y_()),2));
 }
 
-void Objet::RK4_inertie (const double h) {
-  position += h * vitesse + h * h / 6 * ( 3 * acceleration / masse );
-  vitesse += h / 6 * ( 4 * acceleration / masse );
-}
-
-void Objet::RK4 (const double h, const Objet & Objet2) {
+void Objet::RK4 (const double h, std::vector<Objet> const & list_objet) {
   Vecteur k1, k2, k3, k4;
-  k1 = Objet2.const_gravitationnelle_() * Objet2.masse_() / pow(Distance(Objet2.position_(),position), 3) * (Objet2.position_() - position);
-  k2 = Objet2.const_gravitationnelle_() * Objet2.masse_() / pow(Distance(Objet2.position_(),position + h / 2 * vitesse), 3) * (Objet2.position_() - position - h / 2 * vitesse);
-  k3 = Objet2.const_gravitationnelle_() * Objet2.masse_() / pow(Distance(Objet2.position_(),(position + h / 2 * vitesse + h * h / 4 * k1)), 3) * (Objet2.position_() - position - h / 2 * vitesse - h * h / 4 * k1);
-  k4 = Objet2.const_gravitationnelle_() * Objet2.masse_() / pow(Distance(Objet2.position_(),(position + h * vitesse + h * h / 2 * k2)), 3) * (Objet2.position_() - position - h * vitesse - h * h / 2 * k2);
+  unsigned int j = list_objet.size();
+  k1 = k2 = k3 = k4 = acceleration / masse;
+  for (unsigned int i = 0; i<j; i++){
+    //std::cout<<i<<std::endl;
+    k1 += list_objet[i].const_gravitationnelle_() * list_objet[i].masse_() / pow(Distance(list_objet[i].position_(),position), 3) * (list_objet[i].position_() - position);
+    k2 += list_objet[i].const_gravitationnelle_() * list_objet[i].masse_() / pow(Distance(list_objet[i].position_(),position + h / 2 * vitesse), 3) * (list_objet[i].position_() - position - h / 2 * vitesse);
+  };
+  for (unsigned int i = 0; i<j; i++){
+    //std::cout<<i<<std::endl;
+    k3 += list_objet[i].const_gravitationnelle_() * list_objet[i].masse_() / pow(Distance(list_objet[i].position_(),(position + h / 2 * vitesse + h * h / 4 * k1)), 3) * (list_objet[i].position_() - position - h / 2 * vitesse - h * h / 4 * k1);
+    k4 += list_objet[i].const_gravitationnelle_() * list_objet[i].masse_() / pow(Distance(list_objet[i].position_(),(position + h * vitesse + h * h / 2 * k2)), 3) * (list_objet[i].position_() - position - h * vitesse - h * h / 2 * k2);
+  };
   position += h * vitesse + h * h / 6 * (k1 + k2 + k3);
   vitesse += h / 6 * (k1 + k2 + k3 + k4);
 }

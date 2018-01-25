@@ -3,6 +3,7 @@
 #include <SFML/System.hpp>
 #include <iostream>
 #include <fstream>
+#include <vector>
 
 #include "Vecteur.h"
 #include "Objet.h"
@@ -17,9 +18,9 @@ sf::CircleShape Lune(10);
 int main() {
 
   //creation du système
-  Vaisseau Prometheus(50., 50., 50., 10., Vecteur(), Vecteur(), Vecteur (), 1.,1.);
+  Vaisseau Prometheus(60., 60., 60., 60., Vecteur(), Vecteur(), Vecteur (), 1.,1.);
   CorpsStellaire Planete(9.3, 50., Vecteur(), Vecteur(), Vecteur(110,400), 300000.);
-  CorpsStellaire Satellite(9.3, 10., Vecteur(), Vecteur(), Vecteur(900,600), 3000.);
+  CorpsStellaire Satellite(9.3, 10., Vecteur(), Vecteur(), Vecteur(900,600), 300.);
 
   //Figures
   //sf::CircleShape Ship(15);
@@ -71,13 +72,17 @@ int main() {
     Prometheus.Input();
     //std::cout << Prometheus.acceleration_().x_() << std::endl;
     //std::cout << Prometheus.acceleration_().y_() << std::endl;
-    Prometheus.RK4_inertie(h);
-    Prometheus.RK4(h, Planete);
-    Prometheus.RK4(h, Satellite);
+    std::vector<Objet> list_objet;
+    //list_objet.reserve(CorpsStellaire);
+    list_objet.push_back(Planete);
+    list_objet.push_back(Satellite);
+    //std::cout<<list_objet.size()<<std::endl;
+    Prometheus.RK4(h, list_objet);
 
     //Positionnement
     Mars.setPosition(Planete.position_().x_(), Planete.position_().y_());
     Lune.setPosition(Satellite.position_().x_(), Satellite.position_().y_());
+    Ship.setPosition(Prometheus.position_().x_(),Prometheus.position_().y_());
     //Repositionnement
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
       Vecteur Vect_(0.,0.);
