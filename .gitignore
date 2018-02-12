@@ -35,7 +35,7 @@ sfml-app
 # Data files and pictures
 *.dat
 *.res
-*.png
+
 
 # Fichiers de référence
 rk4.cpp
