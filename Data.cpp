@@ -126,12 +126,12 @@ sf::Text Data::params () {
   return (params_);
 }
 
-void Data::loading_font (string nom_font) {
-  font_.loadFromFile(nom_font + ".ttf");
+void Data::loading_font (string nom_font, sf::Font & font) {
+  font.loadFromFile(nom_font + ".ttf");
 }
 
 void Data::text_GO () {
-  loading_font("contrast");
+  loading_font("contrast", font_);
   game_over_.setFont(font_);
   game_over_.setString(std::string("GAME OVER"));
   game_over_.setCharacterSize(100);
@@ -140,9 +140,9 @@ void Data::text_GO () {
 }
 
 void Data::setting () {
-  loading_font("cubic");
+  loading_font("cubic", font_name_);
   game_name_.setFont(font_name_);
-  loading_font("FORCED SQUARE");
+  loading_font("FORCED SQUARE", font_txt_);
   params_.setFont(font_txt_);
   game_name_.setString(std::string("PROMETHEUS"));
   game_name_.setCharacterSize(100);

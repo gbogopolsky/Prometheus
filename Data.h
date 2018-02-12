@@ -32,7 +32,7 @@ public:
         const double MASSE
         );
 
-  void loading_font (string nom_font);
+  void loading_font (string nom_font, sf::Font & font);
   void text_GO ();
   void setting ();
   void corpsstellaire_generation (CorpsStellaire & CorpsStellaire_, sf::CircleShape & corps_);
@@ -130,7 +130,6 @@ private:
   sf::Text game_name_;
   //Texte du jeu
   sf::Text params_;
-
 };
 
 #endif
