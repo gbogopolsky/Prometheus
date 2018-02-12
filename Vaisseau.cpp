@@ -1,7 +1,7 @@
 #define CST_G 6.67408e-11
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <cmath>
-#include <SFML/Graphics.hpp>
 #include <vector>
 #include "Vecteur.h"
 #include "Vaisseau.h"
@@ -15,17 +15,29 @@ Vaisseau::Vaisseau () :
   prop_lat (2.),
   prop_rot (2.),
   rotation (),
-  propulsion ()
+  propulsion (),
+  ship(sf::Vector2f(60, 60))
 {}
 
-Vaisseau::Vaisseau (const double prop_arriere_, const double prop_avant_, const double prop_lat_, const double prop_rot_, const Vecteur rotation_, const Vecteur propulsion_, const Vecteur vitesse_, const Vecteur position_, const double masse_) :
-  Objet (masse_, vitesse_, position_),
+Vaisseau::Vaisseau (const double prop_arriere_,
+                    const double prop_avant_,
+                    const double prop_lat_,
+                    const double prop_rot_,
+                    const Vecteur rotation_,
+                    const Vecteur propulsion_,
+                    const Vecteur vitesse_,
+                    const Vecteur position_,
+                    const double masse_,
+                    const sf::Texture texture_,
+                    const sf::RectangleShape ship_) :
+  Objet (masse_, vitesse_, position_, texture_),
   prop_arriere (prop_arriere_),
   prop_avant (prop_avant_),
   prop_lat (prop_lat_),
   prop_rot (prop_rot_),
   rotation (rotation_),
-  propulsion(propulsion_)
+  propulsion(propulsion_),
+  ship(ship_)
 {}
 
 void Vaisseau::Input_rot () {
@@ -57,8 +69,22 @@ Vecteur Vaisseau::rotation_ () const {
   return rotation;
 }
 
-void Vaisseau::set_rotation (Vecteur & Vect_) {
-  rotation = Vect_;
+sf::RectangleShape Vaisseau::ship_() const {
+  return ship;
+}
+
+void Vaisseau::set_shape (double x, double y) {
+  ship.setPosition(x, y);
+  ship.setRotation(rotation.x_());
+}
+
+void Vaisseau::set_shape () {
+  ship.setPosition(position.x_() - L/2 ,position.y_() - l/2);
+  ship.setRotation(rotation.x_());
+}
+
+void Vaisseau::assign_texture () {
+  ship.setTexture(&texture);
 }
 
 void Vaisseau::RK4 (const double h, std::vector<CorpsStellaire> const & list_objet) {
