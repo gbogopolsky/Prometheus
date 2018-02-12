@@ -38,6 +38,7 @@ public:
   void corpsstellaire_generation (CorpsStellaire & CorpsStellaire_, sf::CircleShape & corps_);
   void mapping ();
   bool uncovering_test ();
+  void Texturage ();
   void ship_deplacement (bool & test);
   void planete_deplacement (bool & test);
 

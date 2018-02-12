@@ -198,16 +198,18 @@ bool Data::uncovering_test () {
   return test;
 }
 
+void Data::Texturage () {
+  Prometheus_.set_texture("V1");
+  Prometheus_.assign_texture();
+}
+
 void Data::ship_deplacement (bool & test) {
   Prometheus_.set_shape();
   Prometheus_.Input_rot();
   Prometheus_.RK4_rotation(h_);
   Prometheus_.Input_prop();
   Prometheus_.RK4(h_, list_objet_);
-  Prometheus_.set_texture("V1");
-  Prometheus_.assign_texture();
   for (int i = 0; i<n_; i++) {
-    cout << list_objet_[i].position_().x_() << "                      " << list_objet_[i].position_().y_() << endl;
     if(Prometheus_.Distance(list_objet_[i].position_(), Prometheus_.position_()) < list_objet_[i].rayon_() && test) {
       test = false;
     };
@@ -222,8 +224,6 @@ void Data::planete_deplacement (bool & test) {
   Prometheus_.RK4_rotation(h_);
   Prometheus_.Input_prop();
   Prometheus_.RK4(h_, list_objet_);
-  Prometheus_.set_texture("V1");
-  Prometheus_.assign_texture();
   for (int i =  0 ; i<n_ ; i++) {
     //cout << list_objet[i].position_().x_() << "                      " << list_objet[i].position_().y_() << endl;
     Vecteur position(list_objet_[i].position_() - (Prometheus_.position_() - position_precedente));

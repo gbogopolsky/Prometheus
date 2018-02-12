@@ -10,6 +10,7 @@ int main() {
   Parametres.text_GO();
   //Parametres.setting();
   Parametres.mapping();
+  Parametres.Texturage();
 
   bool test = false;
   while (test == false)
@@ -63,9 +64,9 @@ int main() {
       Ship = Parametres.Prometheus().ship_();
       game.display();
       game.clear();
+      game.draw(Ship);
       Parametres.ship_deplacement(Continue);
       //Parametres.planete_deplacement(Continue);
-      game.draw(Ship);
       for (int i = 0; i<Parametres.n(); i++) {
         Corps[i].setPosition(Objets[i].position_().x_() - Objets[i].rayon_(), Objets[i].position_().y_() - Objets[i].rayon_());
         Corps[i].setRadius(Objets[i].rayon_());
