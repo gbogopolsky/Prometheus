@@ -40,7 +40,7 @@ public:
   bool uncovering_test ();
   void Texturage ();
   void ship_deplacement (bool & test);
-  void planete_deplacement (bool & test);
+  void planete_deplacement (bool & test, Vecteur & Diff_de_ref);
 
 
   int n ();

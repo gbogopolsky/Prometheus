@@ -12,6 +12,8 @@ int main() {
   Parametres.mapping();
   Parametres.Texturage();
 
+  Vecteur Diff_de_ref;
+
   bool test = false;
   while (test == false)
     test = Parametres.uncovering_test();
@@ -62,13 +64,14 @@ int main() {
       Objets = Parametres.list_objet();
       sf::RectangleShape Ship;
       Ship = Parametres.Prometheus().ship_();
+      Vecteur Diff_de_ref;
       game.display();
       game.clear();
       game.draw(Ship);
-      Parametres.ship_deplacement(Continue);
-      //Parametres.planete_deplacement(Continue);
+      //Parametres.ship_deplacement(Continue);
+      //Parametres.planete_deplacement(Continue,Diff_de_ref);
       for (int i = 0; i<Parametres.n(); i++) {
-        Corps[i].setPosition(Objets[i].position_().x_() - Objets[i].rayon_(), Objets[i].position_().y_() - Objets[i].rayon_());
+        Corps[i].setPosition(Objets[i].position_().x_() - Objets[i].rayon_() - Diff_de_ref.x_(), Objets[i].position_().y_() - Objets[i].rayon_() - Diff_de_ref.y_());
         Corps[i].setRadius(Objets[i].rayon_());
         sf::Texture texture = Objets[i].texture_();
         Corps[i].setTexture(& texture);

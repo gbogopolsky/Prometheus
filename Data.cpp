@@ -5,7 +5,7 @@ random_device r;
 mt19937_64  e1(r());
 
 Data::Data () :
-  n_(1),
+  n_(3),
   t_(3),
   R_(10.),
   M_(0.),
@@ -36,8 +36,8 @@ Data::Data () :
     texture_vaisseau_,
     Ship_
     ),
-  list_objet_ (1),
-  corps_ (1)
+  list_objet_ (3),
+  corps_ (3)
 {}
 
 Data::Data (const int N,
@@ -216,7 +216,7 @@ void Data::ship_deplacement (bool & test) {
   };
 }
 
-void Data::planete_deplacement (bool & test) {
+void Data::planete_deplacement (bool & test, Vecteur & Diff_de_ref) {
   Vecteur position_precedente(Prometheus_.position_());
   Vecteur position_vaisseau(1900/2 - Longueur_/2 ,1200/2 - Largeur_/2);
   Prometheus_.set_shape(position_vaisseau.x_(), position_vaisseau.y_());
@@ -224,17 +224,9 @@ void Data::planete_deplacement (bool & test) {
   Prometheus_.RK4_rotation(h_);
   Prometheus_.Input_prop();
   Prometheus_.RK4(h_, list_objet_);
-  for (int i =  0 ; i<n_ ; i++) {
-    //cout << list_objet[i].position_().x_() << "                      " << list_objet[i].position_().y_() << endl;
-    Vecteur position(list_objet_[i].position_() - (Prometheus_.position_() - position_precedente));
-    list_objet_[i].set_position(position);
-    //cout << list_objet[i].position_().x_() << "                      " << list_objet[i].position_().y_() << endl;
-    //cout << Prometheus.Distance(list_objet[i].position_(), Prometheus.position_()) << endl;
-    //cout << list_objet[i].rayon_() << endl;
-  };
+  Diff_de_ref = (Prometheus_.position_() - position_initial_);
   for (int l = 0; l<n_; l++) {
-    if(Prometheus_.Distance(list_objet_[l].position_(), position_vaisseau) < list_objet_[l].rayon_() && test) {
-      //cout << "ECRASEMENT !!!" << endl;
+    if(Prometheus_.Distance(list_objet_[l].position_(), Prometheus_.position_()) < list_objet_[l].rayon_() && test) {
       test = false;
     };
   };
