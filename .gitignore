@@ -35,6 +35,7 @@ sfml-app
 # Data files and pictures
 *.dat
 *.res
+*.stat.png
 
 
 # Fichiers de référence
