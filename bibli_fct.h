@@ -1,5 +1,12 @@
 #include "Data.h"
 
+//Paramètres aléatoirs
+random_device r;
+mt19937_64  e1(r());
+
+//Data
+
+
 void loading_font (string nom_font, sf::Font & font) {
   font.loadFromFile(nom_font + ".ttf");
 };
