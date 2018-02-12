@@ -9,8 +9,8 @@ CorpsStellaire::CorpsStellaire () :
   rayon (100.)
 {}
 
-CorpsStellaire::CorpsStellaire (const double const_gravitationnelle_, const double rayon_, const Vecteur acceleration_, const Vecteur vitesse_, const Vecteur position_, const double masse_) :
-  Objet (const_gravitationnelle_, masse_, acceleration_, vitesse_, position_),
+CorpsStellaire::CorpsStellaire (const double rayon_, const Vecteur vitesse_, const Vecteur position_, const double masse_) :
+  Objet (masse_, vitesse_, position_),
   rayon (rayon_)
 {}
 
