@@ -17,9 +17,9 @@ int main() {
   sf::Text text;
   text = Parametres.params();
 
-  ofstream outfile;
-  outfile.open("vaisseau.dat");
-  int iterations = 0;
+  // ofstream outfile;
+  // outfile.open("vaisseau.dat");
+  // int iterations = 0;
 
   bool test = false;
   while (test == false)
@@ -76,8 +76,9 @@ int main() {
       game.draw(Ship);
       Parametres.ship_deplacement(Continue);
 
-      // outfile << iterations << " " << Parametres.Prometheus().propulsion_().x_() << " " << Parametres.Prometheus().propulsion_().y_() << " " << Parametres.Prometheus().vitesse_().x_() << " " << Parametres.Prometheus().vitesse_().y_() << " " << Parametres.Prometheus().position_().x_() << " " << Parametres.Prometheus().position_().y_() << endl;
-      iterations += 1;
+      // Vaisseau prom = Parametres.Prometheus();
+      // outfile << iterations << ' ' << prom.propulsion_().x_() << ' ' << prom.propulsion_().y_() << ' ' << prom.position_().x_() << ' ' << prom.position_().y_() << '\n';
+      // iterations += 1;
 
       //Parametres.planete_deplacement(Continue,Diff_de_ref);
       for (int i = 0; i<Parametres.n(); i++) {
@@ -96,6 +97,7 @@ int main() {
       game.draw(Parametres.game_over());
     };
   };
-  outfile.close();
+  // outfile << flush;
+  // outfile.close();
   return 0;
 }
