@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 sortie = np.loadtxt('vaisseau.dat')
-temps = sortie[:,0]*0.010
+temps = sortie[:,0]*0.020
 a_x = sortie[:,1]
 a_y = sortie[:,2]
 v_x = sortie[:,3]
