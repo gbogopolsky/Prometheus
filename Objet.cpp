@@ -33,6 +33,10 @@ Vecteur Objet::position_ () const {
   return position;
 }
 
+Vecteur Objet::vitesse_ () const {
+   return vitesse;
+}
+
 double Objet::masse_ () const {
   return masse;
 }

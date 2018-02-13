@@ -11,6 +11,7 @@ public:
   Objet (const double masse_, const Vecteur vitesse_, const Vecteur position_, const sf::Texture texture_);
 
   Vecteur position_ () const;
+  Vecteur vitesse_ () const;
   double masse_ () const;
   sf::Texture texture_ () const;
 
