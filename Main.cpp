@@ -17,6 +17,10 @@ int main() {
   sf::Text text;
   text = Parametres.params();
 
+  ofstream outfile;
+  outfile.open("vaisseau.dat");
+  int iterations = 0;
+
   bool test = false;
   while (test == false)
     test = Parametres.uncovering_test();
@@ -70,7 +74,11 @@ int main() {
       game.display();
       game.clear();
       game.draw(Ship);
-      //Parametres.ship_deplacement(Continue);
+      Parametres.ship_deplacement(Continue);
+
+      // outfile << iterations << " " << Parametres.Prometheus().propulsion_().x_() << " " << Parametres.Prometheus().propulsion_().y_() << " " << Parametres.Prometheus().vitesse_().x_() << " " << Parametres.Prometheus().vitesse_().y_() << " " << Parametres.Prometheus().position_().x_() << " " << Parametres.Prometheus().position_().y_() << endl;
+      iterations += 1;
+
       //Parametres.planete_deplacement(Continue,Diff_de_ref);
       for (int i = 0; i<Parametres.n(); i++) {
         Corps[i].setPosition(Objets[i].position_().x_() - Objets[i].rayon_() - Diff_de_ref.x_(), Objets[i].position_().y_() - Objets[i].rayon_() - Diff_de_ref.y_());
@@ -88,5 +96,6 @@ int main() {
       game.draw(Parametres.game_over());
     };
   };
+  outfile.close();
   return 0;
 }
