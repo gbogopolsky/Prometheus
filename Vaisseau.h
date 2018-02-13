@@ -22,6 +22,7 @@ public:
             const sf::RectangleShape ship_);
 
   Vecteur rotation_ () const;
+  Vecteur propulsion_ () const;
   sf::RectangleShape ship_() const;
 
   void set_shape (double x, double y);

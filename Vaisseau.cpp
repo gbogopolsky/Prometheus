@@ -69,6 +69,10 @@ Vecteur Vaisseau::rotation_ () const {
   return rotation;
 }
 
+Vecteur Vaisseau::propulsion_ () const {
+   return propulsion;
+}
+
 sf::RectangleShape Vaisseau::ship_() const {
   return ship;
 }
