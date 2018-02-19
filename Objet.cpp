@@ -46,6 +46,11 @@ void Objet::set_position (Vecteur & Vect_) {
   position = Vect_;
 }
 
+void Objet::set_position (double x, double y) {
+  position.set_x(x);
+  position.set_y(y);
+}
+
 void Objet::set_vitesse (Vecteur & Vect_) {
   vitesse = Vect_;
 }

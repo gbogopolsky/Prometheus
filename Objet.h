@@ -15,6 +15,7 @@ public:
   sf::Texture texture_ () const;
 
   void set_position (Vecteur & Vect_);
+  void set_position (double x, double y);
   void set_vitesse (Vecteur & Vect_);
   void set_texture (std::string nom_texture);
   void set_Objet (double & masse_, Vecteur & vitesse_, Vecteur & position_, sf::Texture & texture_);
