@@ -118,6 +118,33 @@ Text Data::game_over () {
   return (game_over_);
 }
 
+void Data::default_setting_1 (vector<Input> & Input) {
+  ostringstream convert_0;
+  convert_0 << n_;
+  Input[0].set_input(convert_0.str());
+  ostringstream convert_1;
+  convert_1 << Rmax_;
+  Input[1].set_input(convert_1.str());
+  ostringstream convert_2;
+  convert_2 << Rmin_;
+  Input[2].set_input(convert_2.str());
+  ostringstream convert_3;
+  convert_3 << Propulsion_Ar_;
+  Input[3].set_input(convert_3.str());
+  ostringstream convert_4;
+  convert_4 << Propulsion_Av_;
+  Input[4].set_input(convert_4.str());
+  ostringstream convert_5;
+  convert_5 << Propulsion_Lat_;
+  Input[5].set_input(convert_5.str());
+  ostringstream convert_6;
+  convert_6 << Propulsion_Rot_;
+  Input[6].set_input(convert_6.str());
+  ostringstream convert_7;
+  convert_7 << Masse_;
+  Input[7].set_input(convert_7.str());
+}
+
 Data Data::cstr_setting_1 (vector<Input> Input) {
   vector<double> covertion_table;
   double Result;

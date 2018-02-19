@@ -31,6 +31,7 @@ public:
         const double MASSE
         );
 
+  void default_setting_1 (vector<Input> & Input);
   Data cstr_setting_1 (vector<Input> Input);
   void corpsstellaire_generation (CorpsStellaire & CorpsStellaire_, sf::CircleShape & corps_);
   void mapping ();

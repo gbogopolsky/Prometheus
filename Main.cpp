@@ -14,6 +14,7 @@ int main() {
   vector<bool> focus_zones;
   Text_First_Page = First_Page.texts();
   Input_Zone_First_Page = First_Page.input_zones();
+  Parametres.default_setting_1(Input_Zone_First_Page);
   for (int i = 0; i<First_Page.m() ; i++) {
     focus_zones.push_back(Input_Zone_First_Page[i].focus_zone());
   };
@@ -36,9 +37,12 @@ int main() {
     sf::Event event;
 
     while (param.pollEvent(event)) {
-      if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::P))
+      if (event.type == sf::Event::Closed) {
         param.close();
         game.close();
+      };
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
+        param.close();
       if (event.type == sf::Event::MouseButtonPressed) {
         for (int i = 0; i<First_Page.m(); i++) {
           int x =  Input_Zone_First_Page[i].input_zone().getPosition().x;
@@ -57,6 +61,12 @@ int main() {
       };
       for (int i = 0; i<First_Page.m(); i++) {
         if (event.type == sf::Event::TextEntered && focus_zones[i]) {
+          if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) {
+            focus_zones[i+1] = true;
+            focus_zones[i] = false;
+            i++;
+            ipt = "";
+          };
           if (event.text.unicode < 128) {
             cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << endl;
             ipt.append(1,static_cast<char>(event.text.unicode));
@@ -76,10 +86,6 @@ int main() {
       param.draw(Input_Zone_First_Page[i].input_zone());
       if (sf::Keyboard::isKeyPressed(sf::Keyboard::F))
         focus_zones[i] = false;
-      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Tab)) {
-        focus_zones[i] = false;
-        focus_zones[i+1] = true;
-      }
       if (focus_zones[i]) {
         param.draw(champ_test);
       };
