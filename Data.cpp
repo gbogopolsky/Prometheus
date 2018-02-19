@@ -37,14 +37,13 @@ Data::Data () :
     Ship_
     ),
   list_objet_ (3),
-  corps_ (3)
+  corps_ (3),
+  game_over_()
 {}
 
-Data::Data (const int N,
-            const int RMAX,
-            const int RMIN,
-            const int LX,
-            const int LY,
+Data::Data (const double N,
+            const double RMAX,
+            const double RMIN,
             const double PROPULSION_AR,
             const double PROPULSION_AV,
             const double PROPULSION_LAT,
@@ -57,8 +56,8 @@ Data::Data (const int N,
   M_(0.),
   Rmax_(RMAX),
   Rmin_(RMIN),
-  Lx_(LX),
-  Ly_(LY),
+  Lx_(1900),
+  Ly_(1200),
   h_(0.08),
   Propulsion_Ar_(PROPULSION_AR),
   Propulsion_Av_(PROPULSION_AV),
@@ -83,10 +82,11 @@ Data::Data (const int N,
     Ship_
     ),
   list_objet_ (N),
-  corps_ (N)
+  corps_ (N),
+  game_over_()
 {}
 
-int Data::n () {
+double Data::n () {
   return (n_);
 }
 
@@ -114,43 +114,21 @@ vector<sf::CircleShape> Data::corps () {
   return (corps_);
 }
 
-sf::Text Data::game_over () {
+Text Data::game_over () {
   return (game_over_);
 }
 
-sf::Text Data::game_name () {
-  return (game_name_);
-}
-
-sf::Text Data::params () {
-  return (params_);
-}
-
-void Data::loading_font (string nom_font, sf::Font & font) {
-  font.loadFromFile(nom_font + ".ttf");
-}
-
-void Data::text_GO () {
-  loading_font("contrast", font_);
-  game_over_.setFont(font_);
-  game_over_.setString(std::string("GAME OVER"));
-  game_over_.setCharacterSize(100);
-  game_over_.setColor(sf::Color::Red);
-  game_over_.setPosition(100,100);
-}
-
-void Data::setting () {
-  loading_font("cubic", font_name_);
-  game_name_.setFont(font_name_);
-  loading_font("FORCED SQUARE", font_txt_);
-  params_.setFont(font_txt_);
-  game_name_.setString(std::string("PROMETHEUS"));
-  game_name_.setCharacterSize(100);
-  game_name_.setColor(sf::Color::Yellow);
-  game_name_.setPosition(100, 200);
-  params_.setCharacterSize(40);
-  params_.setColor(sf::Color::Yellow);
-  params_.setPosition(100, 400);
+Data Data::cstr_setting_1 (vector<Input> Input) {
+  vector<double> covertion_table;
+  double Result;
+  for (unsigned int i = 0; i<Input.size(); i++) {
+    istringstream convert_number(Input[i].input());
+    if (!(convert_number >> Result))
+      Result = 0;
+    covertion_table.push_back(Result);
+  };
+  Data Parametres(covertion_table[0], covertion_table[1], covertion_table[2], covertion_table[3], covertion_table[4], covertion_table[5], covertion_table[6], covertion_table[7]);
+  return (Parametres);
 }
 
 void Data::corpsstellaire_generation (CorpsStellaire & CorpsStellaire_, sf::CircleShape & corps_) {
@@ -191,6 +169,8 @@ bool Data::uncovering_test () {
     for (int i = j+1; i < n_; i++) {
       if (list_objet_[j].Distance(list_objet_[i].position_(), list_objet_[j].position_()) < (list_objet_[j].rayon_() + list_objet_[i].rayon_()))
         test = false;
+      if (Prometheus_.Distance(list_objet_[i].position_(), Prometheus_.position_()) < list_objet_[i].rayon_())
+        test = false;
     };
   };
   if (test == false)
@@ -203,12 +183,50 @@ void Data::Texturage () {
   Prometheus_.assign_texture();
 }
 
+void Data::reset () {
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+    Prometheus_.set_position(position_initial_);
+    Vecteur vect;
+    Prometheus_.set_vitesse(vect);
+  };
+}
+
+void Data::sides () {
+  if (Prometheus_.position_().x_() > Lx_) {
+    Prometheus_.set_position(0.,Prometheus_.position_().y_());
+    mapping();
+    uncovering_test();
+  };
+  if (Prometheus_.position_().x_() < 0.) {
+    Prometheus_.set_position(Lx_,Prometheus_.position_().y_());
+    mapping();
+    uncovering_test();
+  };
+  if (Prometheus_.position_().y_() > Ly_) {
+    Prometheus_.set_position(Prometheus_.position_().x_(),0.);
+    mapping();
+    uncovering_test();
+  };
+  if (Prometheus_.position_().y_() < 0.) {
+    Prometheus_.set_position(Prometheus_.position_().x_(),Ly_);
+    mapping();
+    uncovering_test();
+  };
+}
+
+void Data::Game_Over () {
+  Vecteur position(400, Ly_/2-200);
+  game_over_.loading(0,"contrast", "GAME OVER", 200, position);
+}
+
 void Data::ship_deplacement (bool & test) {
   Prometheus_.set_shape();
+  reset();
   Prometheus_.Input_rot();
   Prometheus_.RK4_rotation(h_);
   Prometheus_.Input_prop();
   Prometheus_.RK4(h_, list_objet_);
+  sides();
   for (int i = 0; i<n_; i++) {
     if(Prometheus_.Distance(list_objet_[i].position_(), Prometheus_.position_()) < list_objet_[i].rayon_() && test) {
       test = false;
@@ -220,6 +238,7 @@ void Data::planete_deplacement (bool & test, Vecteur & Diff_de_ref) {
   Vecteur position_precedente(Prometheus_.position_());
   Vecteur position_vaisseau(1900/2 - Longueur_/2 ,1200/2 - Largeur_/2);
   Prometheus_.set_shape(position_vaisseau.x_(), position_vaisseau.y_());
+  reset();
   Prometheus_.Input_rot();
   Prometheus_.RK4_rotation(h_);
   Prometheus_.Input_prop();

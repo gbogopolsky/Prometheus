@@ -12,6 +12,7 @@
 #include "Objet.h"
 #include "Vaisseau.h"
 #include "CorpsStellaire.h"
+#include "PageSetting.h"
 
 using namespace std;
 
@@ -20,11 +21,9 @@ class Data {
 public:
 
   Data ();
-  Data (const int N,
-        const int RMAX,
-        const int RMIN,
-        const int LX,
-        const int LY,
+  Data (const double N,
+        const double RMAX,
+        const double RMIN,
         const double PROPULSION_AR,
         const double PROPULSION_AV,
         const double PROPULSION_LAT,
@@ -32,18 +31,19 @@ public:
         const double MASSE
         );
 
-  void loading_font (string nom_font, sf::Font & font);
-  void text_GO ();
-  void setting ();
+  Data cstr_setting_1 (vector<Input> Input);
   void corpsstellaire_generation (CorpsStellaire & CorpsStellaire_, sf::CircleShape & corps_);
   void mapping ();
   bool uncovering_test ();
   void Texturage ();
+  void reset ();
+  void sides ();
+  void Game_Over ();
   void ship_deplacement (bool & test);
   void planete_deplacement (bool & test, Vecteur & Diff_de_ref);
 
 
-  int n ();
+  double n ();
   //int t () const;
   //double R () const;
   //double M () const;
@@ -65,27 +65,21 @@ public:
   Vaisseau Prometheus();
   vector<CorpsStellaire> list_objet ();
   vector<sf::CircleShape> corps ();
-  //sf::Font font () const;
-  //sf::Font font_name () const:
-  //sf::Font font_txt () const;
-  sf::Text game_over ();
-  sf::Text game_name ();
-  sf::Text params ();
-
+  Text game_over ();
 
 private:
   //Nombre d'objets
-  int n_;
+  double n_;
   //Nombre de texture de planètes differentes
-  int t_;
+  double t_;
   //Rayon d'un CorpsStellaire
   double R_;
   //Masse d'un CorpsStellaire
   double M_;
   //Rayon maximum d'un CorpsStellaire
-  int Rmax_;
+  double Rmax_;
   //Rayon minimum d'un CorpsStellaire
-  int Rmin_;
+  double Rmin_;
   //Taille de la fenêtre selon x
   int Lx_;
   //Taille de la fenêtre seon y
@@ -119,17 +113,7 @@ private:
   //Liste de CorpsStellaire (affichage)
   vector<sf::CircleShape> corps_;
   //Police game over
-  sf::Font font_;
-  //Police nom du jeu
-  sf::Font font_name_;
-  //Police texte du jeu
-  sf::Font font_txt_;
-  //Texte game over
-  sf::Text game_over_;
-  //Texte nom du jeu
-  sf::Text game_name_;
-  //Texte du jeu
-  sf::Text params_;
+  Text game_over_;
 };
 
 #endif
