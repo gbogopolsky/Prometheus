@@ -1,6 +1,4 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
-#include <cmath>
 #include "Vecteur.h"
 #include "CorpsStellaire.h"
 #include "Objet.h"
