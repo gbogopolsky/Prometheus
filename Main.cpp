@@ -6,7 +6,7 @@ sf::RenderWindow param;
 
 int main() {
 
-  Data Parametres;
+  Data Parametres(3,120,30,80,20,10,10,8);
   PageSetting First_Page(12,8);
   First_Page.setting_1();
   vector<Text> Text_First_Page;
