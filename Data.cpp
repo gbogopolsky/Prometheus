@@ -231,3 +231,16 @@ void Data::planete_deplacement (bool & test, Vecteur & Diff_de_ref) {
     };
   };
 }
+
+void Data::vaisseauStabilisation () {
+   double eps = 1.e-3;
+   double vitesse_x = Prometheus_.vitesse_().x_();
+   double vitesse_y = Prometheus_.vitesse_().y_();
+   double rot = Prometheus_.rotation_().x_();
+   if (vitesse_x > eps) {};   //=> accélération selon -x
+   if (vitesse_x < - eps) {}; //=> accélération selon +x
+   if (vitesse_y > eps) {};   //=> accélération selon -y
+   if (vitesse_y < - eps) {}; //=> accélération selon +y
+   if (rot > eps) {};         //=> couple selon -angle
+   if (rot < eps) {};         //=> couple selon +angle
+}
