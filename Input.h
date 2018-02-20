@@ -15,7 +15,6 @@ public:
   Text input_text();
   bool focus_zone ();
 
-
   void set_input (string ipt);
   void input_zone (sf::Vector2f size, Vecteur position);
 

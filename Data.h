@@ -28,7 +28,8 @@ public:
         const double PROPULSION_AV,
         const double PROPULSION_LAT,
         const double PROPULSION_ROT,
-        const double MASSE
+        const double MASSE,
+        const int MODE
         );
 
   void default_setting_1 (vector<Input> & Input);
@@ -40,6 +41,7 @@ public:
   void reset ();
   void sides ();
   void Game_Over ();
+  void set_mode ();
   void ship_deplacement (bool & test);
   void planete_deplacement (bool & test, Vecteur & Diff_de_ref);
 
@@ -67,6 +69,7 @@ public:
   vector<CorpsStellaire> list_objet ();
   vector<sf::CircleShape> corps ();
   Text game_over ();
+  int Mode ();
 
 private:
   //Nombre d'objets
@@ -115,6 +118,8 @@ private:
   vector<sf::CircleShape> corps_;
   //Police game over
   Text game_over_;
+  //Mode de jeu
+  int mode_;
 };
 
 #endif

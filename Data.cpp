@@ -38,7 +38,8 @@ Data::Data () :
     ),
   list_objet_ (3),
   corps_ (3),
-  game_over_()
+  game_over_(),
+  mode_(0)
 {}
 
 Data::Data (const double N,
@@ -48,7 +49,8 @@ Data::Data (const double N,
             const double PROPULSION_AV,
             const double PROPULSION_LAT,
             const double PROPULSION_ROT,
-            const double MASSE
+            const double MASSE,
+            const int MODE
             ) :
   n_(N),
   t_(3),
@@ -83,7 +85,8 @@ Data::Data (const double N,
     ),
   list_objet_ (N),
   corps_ (N),
-  game_over_()
+  game_over_(),
+  mode_(MODE)
 {}
 
 double Data::n () {
@@ -116,6 +119,10 @@ vector<sf::CircleShape> Data::corps () {
 
 Text Data::game_over () {
   return (game_over_);
+}
+
+int Data::Mode () {
+  return (mode_);
 }
 
 void Data::default_setting_1 (vector<Input> & Input) {
@@ -154,7 +161,7 @@ Data Data::cstr_setting_1 (vector<Input> Input) {
       Result = 0;
     covertion_table.push_back(Result);
   };
-  Data Parametres(covertion_table[0], covertion_table[1], covertion_table[2], covertion_table[3], covertion_table[4], covertion_table[5], covertion_table[6], covertion_table[7]);
+  Data Parametres(covertion_table[0], covertion_table[1], covertion_table[2], covertion_table[3], covertion_table[4], covertion_table[5], covertion_table[6], covertion_table[7], mode_);
   return (Parametres);
 }
 
@@ -243,7 +250,16 @@ void Data::sides () {
 
 void Data::Game_Over () {
   Vecteur position(400, Ly_/2-200);
-  game_over_.loading(0,"contrast", "GAME OVER", 200, position);
+  game_over_.loading(0,"28 Days Later", "GAME OVER", 200, position);
+}
+
+void Data::set_mode () {
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
+    mode_ = 0;
+  };
+  if (sf::Keyboard::isKeyPressed(sf::Keyboard::F2)) {
+    mode_ = 1;
+  };
 }
 
 void Data::ship_deplacement (bool & test) {
