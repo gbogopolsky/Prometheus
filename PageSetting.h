@@ -20,7 +20,7 @@ public:
   vector<Text> texts ();
   vector<Input> input_zones ();
 
-  void setting_1 ();
+  void setting_1 (int mode);
 
 private:
   int n_;
