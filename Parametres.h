@@ -75,16 +75,6 @@ void Front_Page (sf::RenderWindow & param_, sf::RenderWindow & game_, Vecteur Di
       sf::Text text = Text_First_Page[i].text();
       param_.draw(text);
     };
-    if (Parametres.Mode() == 0) {
-      sf::RectangleShape rect_f1 = Input_Zone_First_Page[14].input_zone();
-      rect_f1.setOutlineThickness(4);
-      rect_f1.setOutlineColor(sf::Color::Red);
-    }
-    else if (Parametres.Mode() == 1) {
-      sf::RectangleShape rect_f2 = Input_Zone_First_Page[15].input_zone();
-      rect_f2.setOutlineThickness(4);
-      rect_f2.setOutlineColor(sf::Color::Red);
-    };
     for (int i = 0; i<First_Page.m(); i++) {
       sf::Text ipt_txt = Input_Zone_First_Page[i].text();
       param_.draw(Input_Zone_First_Page[i].input_zone());
