@@ -125,45 +125,45 @@ int Data::Mode () {
   return (mode_);
 }
 
-void Data::default_setting_1 (vector<Input> & Input) {
-  ostringstream convert_0;
-  convert_0 << n_;
-  Input[0].set_input(convert_0.str());
-  ostringstream convert_1;
-  convert_1 << Rmax_;
-  Input[1].set_input(convert_1.str());
-  ostringstream convert_2;
-  convert_2 << Rmin_;
-  Input[2].set_input(convert_2.str());
-  ostringstream convert_3;
-  convert_3 << Propulsion_Ar_;
-  Input[3].set_input(convert_3.str());
-  ostringstream convert_4;
-  convert_4 << Propulsion_Av_;
-  Input[4].set_input(convert_4.str());
-  ostringstream convert_5;
-  convert_5 << Propulsion_Lat_;
-  Input[5].set_input(convert_5.str());
-  ostringstream convert_6;
-  convert_6 << Propulsion_Rot_;
-  Input[6].set_input(convert_6.str());
-  ostringstream convert_7;
-  convert_7 << Masse_;
-  Input[7].set_input(convert_7.str());
-}
-
-Data Data::cstr_setting_1 (vector<Input> Input) {
-  vector<double> covertion_table;
-  double Result;
-  for (unsigned int i = 0; i<Input.size(); i++) {
-    istringstream convert_number(Input[i].input());
-    if (!(convert_number >> Result))
-      Result = 0;
-    covertion_table.push_back(Result);
-  };
-  Data Parametres(covertion_table[0], covertion_table[1], covertion_table[2], covertion_table[3], covertion_table[4], covertion_table[5], covertion_table[6], covertion_table[7], mode_);
-  return (Parametres);
-}
+// void Data::default_setting_1 (vector<Input> & Input) {
+//   ostringstream convert_0;
+//   convert_0 << n_;
+//   Input[0].set_input(convert_0.str());
+//   ostringstream convert_1;
+//   convert_1 << Rmax_;
+//   Input[1].set_input(convert_1.str());
+//   ostringstream convert_2;
+//   convert_2 << Rmin_;
+//   Input[2].set_input(convert_2.str());
+//   ostringstream convert_3;
+//   convert_3 << Propulsion_Ar_;
+//   Input[3].set_input(convert_3.str());
+//   ostringstream convert_4;
+//   convert_4 << Propulsion_Av_;
+//   Input[4].set_input(convert_4.str());
+//   ostringstream convert_5;
+//   convert_5 << Propulsion_Lat_;
+//   Input[5].set_input(convert_5.str());
+//   ostringstream convert_6;
+//   convert_6 << Propulsion_Rot_;
+//   Input[6].set_input(convert_6.str());
+//   ostringstream convert_7;
+//   convert_7 << Masse_;
+//   Input[7].set_input(convert_7.str());
+// }
+//
+// Data Data::cstr_setting_1 (vector<Input> Input) {
+//   vector<double> covertion_table;
+//   double Result;
+//   for (unsigned int i = 0; i<Input.size(); i++) {
+//     istringstream convert_number(Input[i].input());
+//     if (!(convert_number >> Result))
+//       Result = 0;
+//     covertion_table.push_back(Result);
+//   }
+//   Data Parametres(covertion_table[0], covertion_table[1], covertion_table[2], covertion_table[3], covertion_table[4], covertion_table[5], covertion_table[6], covertion_table[7], mode_);
+//   return (Parametres);
+// }
 
 void Data::corpsstellaire_generation (CorpsStellaire & CorpsStellaire_, sf::CircleShape & corps_) {
   double x, y, vx, vy;
@@ -205,8 +205,8 @@ bool Data::uncovering_test () {
         test = false;
       if (Prometheus_.Distance(list_objet_[i].position_(), Prometheus_.position_()) < list_objet_[i].rayon_())
         test = false;
-    };
-  };
+    }
+  }
   if (test == false)
     mapping();
   return test;
@@ -222,7 +222,7 @@ void Data::reset () {
     Prometheus_.set_position(position_initial_);
     Vecteur vect;
     Prometheus_.set_vitesse(vect);
-  };
+  }
 }
 
 void Data::sides () {
@@ -230,22 +230,22 @@ void Data::sides () {
     Prometheus_.set_position(0.,Prometheus_.position_().y_());
     mapping();
     uncovering_test();
-  };
+  }
   if (Prometheus_.position_().x_() < 0.) {
     Prometheus_.set_position(Lx_,Prometheus_.position_().y_());
     mapping();
     uncovering_test();
-  };
+  }
   if (Prometheus_.position_().y_() > Ly_) {
     Prometheus_.set_position(Prometheus_.position_().x_(),0.);
     mapping();
     uncovering_test();
-  };
+  }
   if (Prometheus_.position_().y_() < 0.) {
     Prometheus_.set_position(Prometheus_.position_().x_(),Ly_);
     mapping();
     uncovering_test();
-  };
+  }
 }
 
 void Data::Game_Over () {
@@ -256,10 +256,10 @@ void Data::Game_Over () {
 void Data::set_mode () {
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
     mode_ = 0;
-  };
+  }
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::F2)) {
     mode_ = 1;
-  };
+  }
 }
 
 void Data::ship_deplacement (bool & test) {
@@ -273,8 +273,8 @@ void Data::ship_deplacement (bool & test) {
   for (int i = 0; i<n_; i++) {
     if(Prometheus_.Distance(list_objet_[i].position_(), Prometheus_.position_()) < list_objet_[i].rayon_() && test) {
       test = false;
-    };
-  };
+    }
+  }
 }
 
 void Data::planete_deplacement (bool & test, Vecteur & Diff_de_ref) {
@@ -290,6 +290,6 @@ void Data::planete_deplacement (bool & test, Vecteur & Diff_de_ref) {
   for (int l = 0; l<n_; l++) {
     if(Prometheus_.Distance(list_objet_[l].position_(), Prometheus_.position_()) < list_objet_[l].rayon_() && test) {
       test = false;
-    };
-  };
+    }
+  }
 }

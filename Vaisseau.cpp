@@ -95,12 +95,12 @@ void Vaisseau::RK4 (const double h, std::vector<CorpsStellaire> const & list_obj
     //std::cout<<i<<std::endl;
     k1 += CST_G * list_objet[i].masse_() / pow(Distance(list_objet[i].position_(),position), 3) * (list_objet[i].position_() - position);
     k2 += CST_G * list_objet[i].masse_() / pow(Distance(list_objet[i].position_(),position + h / 2 * vitesse), 3) * (list_objet[i].position_() - position - h / 2 * vitesse);
-  };
+  }
   for (unsigned int i = 0; i<j; i++){
     //std::cout<<i<<std::endl;
     k3 += CST_G * list_objet[i].masse_() / pow(Distance(list_objet[i].position_(),(position + h / 2 * vitesse + h * h / 4 * k1)), 3) * (list_objet[i].position_() - position - h / 2 * vitesse - h * h / 4 * k1);
     k4 += CST_G * list_objet[i].masse_() / pow(Distance(list_objet[i].position_(),(position + h * vitesse + h * h / 2 * k2)), 3) * (list_objet[i].position_() - position - h * vitesse - h * h / 2 * k2);
-  };
+  }
   position += h * vitesse + h * h / 6 * (k1 + k2 + k3);
   vitesse += h / 6 * (k1 + k2 + k3 + k4);
 }

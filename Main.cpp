@@ -1,7 +1,6 @@
 #include "Game.h"
 
 sf::RenderWindow game;
-sf::RenderWindow param;
 
 int main() {
 
@@ -12,11 +11,18 @@ int main() {
 
   bool end = true;
   bool close = true;
+  bool test = false;
+  game.create(sf::VideoMode(Parametres.Lx(), Parametres.Ly()), "The Game");
+  Parametres.Texturage();
+  Parametres.Game_Over();
 
   do {
-    game.create(sf::VideoMode(Parametres.Lx(), Parametres.Ly()), "The Game");
-    param.create(sf::VideoMode(Parametres.Lx(), Parametres.Ly()), "Paramètres");
-    Front_Page (param, game, Diff_de_ref, Parametres, close);
-  } while (Game(game, param, Diff_de_ref, time, Parametres, end, close));
+
+    Parametres.mapping();
+
+    while (test == false) {
+      test = Parametres.uncovering_test();
+    }
+  } while (Game(game, Diff_de_ref, time, Parametres, end, close));
   return 0;
   }
