@@ -5,7 +5,7 @@ sf::RenderWindow param;
 
 int main() {
 
-  Data Parametres(3,120,30,80,20,10,10,4,0);
+  Data Parametres(3,120,30,80,20,10,10,2,0);
 
   sf::Time time = sf::milliseconds(20);
   Vecteur Diff_de_ref;
