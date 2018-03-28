@@ -1,32 +1,42 @@
-#ifndef Objet_h
-#define Objet_h
-#include <SFML/Graphics.hpp>
-#include <vector>
-#include <string>
+#ifndef _OBJET_H
+#define _OBJET_H
+
+
 #include "Vecteur.h"
 
 class Objet {
-public:
-  Objet ();
-  Objet (const double masse_, const Vecteur vitesse_, const Vecteur position_, const sf::Texture texture_);
+  public:
+    Objet();
 
-  Vecteur position_ () const;
-  double masse_ () const;
-  sf::Texture texture_ () const;
+    Objet(const double masse_, const Vecteur vitesse_, const Vecteur position_, const sf::Texture texture_);
 
-  void set_position (Vecteur & Vect_);
-  void set_position (double x, double y);
-  void set_vitesse (Vecteur & Vect_);
-  void set_texture (std::string nom_texture);
-  void set_Objet (double & masse_, Vecteur & vitesse_, Vecteur & position_, sf::Texture & texture_);
+    Vecteur position_() const;
 
-  double Distance (const Vecteur & Vecteur1, const Vecteur & Vecteur2);
+    double masse_() const;
 
-protected:
-  double masse;
-  Vecteur vitesse;
-  Vecteur position;
-  sf::Texture texture;
+    sf::Texture texture_() const;
+
+    void set_position(Vecteur & Vect_);
+
+    void set_position(double x, double y);
+
+    void set_vitesse(Vecteur & Vect_);
+
+    void set_texture(std::string nom_texture);
+
+    void set_Objet(double & masse_, Vecteur & vitesse_, Vecteur & position_, sf::Texture & texture_);
+
+    double Distance(const Vecteur & Vecteur1, const Vecteur & Vecteur2);
+
+
+  protected:
+    double masse;
+
+    Vecteur vitesse;
+
+    Vecteur position;
+
+    sf::Texture texture;
+
 };
-
 #endif
