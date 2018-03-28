@@ -56,4 +56,3 @@ void Objet::set_Objet() {
 double Objet::Distance() {
   return sqrt(pow(Vecteur1.y_() - Vecteur2.y_(),2) + pow((Vecteur1.x_() - Vecteur2.x_()),2));
 }
-

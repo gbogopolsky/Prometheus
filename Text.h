@@ -27,7 +27,7 @@ class Text {
   protected:
     // void loading (int c, string nom_font,  int size, Vecteur position);
     // void loading (int c, int size, Vecteur position);
-    
+
     sf::Font font_;
 
     sf::Text text_;

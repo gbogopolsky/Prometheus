@@ -61,4 +61,3 @@ Vecteur operator *() {
 Vecteur operator /() {
   return Vecteur(vecteur_.x_()/dt_, vecteur_.y_()/dt_);
 }
-

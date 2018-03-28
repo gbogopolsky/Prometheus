@@ -98,4 +98,3 @@ void Vaisseau::RK4_rotation() {
   rotation.set_x(rotation.x_() + h * rotation.y_() + h * h / 6 * (k1 + k2 + k3));
   rotation.set_y(rotation.y_() + h / 6 * (k1 + k2 + k3 + k4));
 }
-

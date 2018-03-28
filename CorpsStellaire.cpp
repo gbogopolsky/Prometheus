@@ -24,4 +24,3 @@ void CorpsStellaire::set_CorpsStellaire() {
 double CorpsStellaire::rayon_() const {
   return rayon;
 }
-
