@@ -1,26 +1,20 @@
-#ifndef _CORPSSTELLAIRE_H
-#define _CORPSSTELLAIRE_H
-
-
+#ifndef CorpsStellaire_h
+#define CorpsStellaire_h
+#include <SFML/Graphics.hpp>
+#include "Vecteur.h"
 #include "Objet.h"
 
-class Vecteur;
-
 class CorpsStellaire : public Objet {
-  public:
-    CorpsStellaire();
+public:
+  CorpsStellaire ();
+  CorpsStellaire (const double rayon_, const Vecteur vitesse_, const Vecteur position_, const double masse_, const sf::Texture texture_, const sf::CircleShape planete_);
+  void set_CorpsStellaire (double & rayon_, sf::CircleShape & planete_);
 
-    CorpsStellaire(const double rayon_, const Vecteur vitesse_, const Vecteur position_, const double masse_, const sf::Texture texture_, const sf::CircleShape planete_);
+  double rayon_ () const;
 
-    void set_CorpsStellaire(double & rayon_, sf::CircleShape & planete_);
-
-    double rayon_() const;
-
-
-  private:
-    double rayon;
-
-    sf::CircleShape planete;
-
+private:
+  double rayon;
+  sf::CircleShape planete;
 };
+
 #endif

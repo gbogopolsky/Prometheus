@@ -48,6 +48,8 @@ bool Game (sf::RenderWindow & game_, Vecteur Diff_de_ref, sf::Time time, Data & 
         game_.draw(game_setting.game_over().text());
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
           end = true;
+          // game_.close();
+          // param_.close();
         }
         else {
           end = false;

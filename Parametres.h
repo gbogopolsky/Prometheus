@@ -13,7 +13,7 @@ void Front_Page (sf::RenderWindow & param_, sf::RenderWindow & game_, Vecteur Di
   Parametres.default_setting_1(Input_Zone_First_Page);
   for (int i = 0; i<First_Page.m() ; i++) {
     focus_zones.push_back(Input_Zone_First_Page[i].focus_zone());
-  }
+  };
 
   string ipt;
   sf::Text texte = Input_Zone_First_Page[0].input_text().text();

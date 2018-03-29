@@ -1,8 +1,10 @@
-
 #include "Data.h"
-#include "CorpsStellaire.h"
 
-Data::Data() :
+//Paramètres aléatoirs
+random_device r;
+mt19937_64  e1(r());
+
+Data::Data () :
   n_(3),
   t_(3),
   R_(10.),
@@ -38,10 +40,18 @@ Data::Data() :
   corps_ (3),
   game_over_(),
   mode_(0)
-{
-}
+{}
 
-Data::Data(const double N, const double RMAX, const double RMIN, const double PROPULSION_AR, const double PROPULSION_AV, const double PROPULSION_LAT, const double PROPULSION_ROT, const double MASSE, const int MODE) :
+Data::Data (const double N,
+            const double RMAX,
+            const double RMIN,
+            const double PROPULSION_AR,
+            const double PROPULSION_AV,
+            const double PROPULSION_LAT,
+            const double PROPULSION_ROT,
+            const double MASSE,
+            const int MODE
+            ) :
   n_(N),
   t_(3),
   R_(10.),
@@ -77,10 +87,85 @@ Data::Data(const double N, const double RMAX, const double RMIN, const double PR
   corps_ (N),
   game_over_(),
   mode_(MODE)
-{
+{}
+
+double Data::n () {
+  return (n_);
 }
 
-void Data::corpsstellaire_generation() {
+int Data::Lx () {
+  return (Lx_);
+}
+
+int Data::Ly () {
+  return (Ly_);
+}
+
+sf::RectangleShape Data::Ship () {
+  return (Ship_);
+}
+
+Vaisseau Data::Prometheus () {
+  return (Prometheus_);
+}
+
+vector<CorpsStellaire> Data::list_objet () {
+  return (list_objet_);
+}
+
+vector<sf::CircleShape> Data::corps () {
+  return (corps_);
+}
+
+Text Data::game_over () {
+  return (game_over_);
+}
+
+int Data::Mode () {
+  return (mode_);
+}
+
+// void Data::default_setting_1 (vector<Input> & Input) {
+//   ostringstream convert_0;
+//   convert_0 << n_;
+//   Input[0].set_input(convert_0.str());
+//   ostringstream convert_1;
+//   convert_1 << Rmax_;
+//   Input[1].set_input(convert_1.str());
+//   ostringstream convert_2;
+//   convert_2 << Rmin_;
+//   Input[2].set_input(convert_2.str());
+//   ostringstream convert_3;
+//   convert_3 << Propulsion_Ar_;
+//   Input[3].set_input(convert_3.str());
+//   ostringstream convert_4;
+//   convert_4 << Propulsion_Av_;
+//   Input[4].set_input(convert_4.str());
+//   ostringstream convert_5;
+//   convert_5 << Propulsion_Lat_;
+//   Input[5].set_input(convert_5.str());
+//   ostringstream convert_6;
+//   convert_6 << Propulsion_Rot_;
+//   Input[6].set_input(convert_6.str());
+//   ostringstream convert_7;
+//   convert_7 << Masse_;
+//   Input[7].set_input(convert_7.str());
+// }
+//
+// Data Data::cstr_setting_1 (vector<Input> Input) {
+//   vector<double> covertion_table;
+//   double Result;
+//   for (unsigned int i = 0; i<Input.size(); i++) {
+//     istringstream convert_number(Input[i].input());
+//     if (!(convert_number >> Result))
+//       Result = 0;
+//     covertion_table.push_back(Result);
+//   }
+//   Data Parametres(covertion_table[0], covertion_table[1], covertion_table[2], covertion_table[3], covertion_table[4], covertion_table[5], covertion_table[6], covertion_table[7], mode_);
+//   return (Parametres);
+// }
+
+void Data::corpsstellaire_generation (CorpsStellaire & CorpsStellaire_, sf::CircleShape & corps_) {
   double x, y, vx, vy;
   sf::Texture texture;
   uniform_int_distribution<int> uniform_dist_R(Rmin_, Rmax_);
@@ -106,13 +191,13 @@ void Data::corpsstellaire_generation() {
   CorpsStellaire_.set_CorpsStellaire(R_, corps_);
 }
 
-void Data::mapping() {
+void Data::mapping () {
   for (int i = 0; i<n_; i++){
     corpsstellaire_generation(list_objet_[i], corps_[i]);
   };
-}
+};
 
-bool Data::uncovering_test() {
+bool Data::uncovering_test () {
   bool test = true;
   for (int j = 0; j < (n_ - 1); j++) {
     for (int i = j+1; i < n_; i++) {
@@ -127,12 +212,12 @@ bool Data::uncovering_test() {
   return test;
 }
 
-void Data::Texturage() {
+void Data::Texturage () {
   Prometheus_.set_texture("V1");
   Prometheus_.assign_texture();
 }
 
-void Data::reset() {
+void Data::reset () {
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
     Prometheus_.set_position(position_initial_);
     Vecteur vect;
@@ -140,7 +225,7 @@ void Data::reset() {
   }
 }
 
-void Data::sides() {
+void Data::sides () {
   if (Prometheus_.position_().x_() > Lx_) {
     Prometheus_.set_position(0.,Prometheus_.position_().y_());
     mapping();
@@ -163,12 +248,12 @@ void Data::sides() {
   }
 }
 
-void Data::Game_Over() {
+void Data::Game_Over () {
   Vecteur position(400, Ly_/2-200);
   game_over_.loading(0,"28 Days Later", "GAME OVER", 200, position);
 }
 
-void Data::set_mode() {
+void Data::set_mode () {
   if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
     mode_ = 0;
   }
@@ -177,7 +262,7 @@ void Data::set_mode() {
   }
 }
 
-void Data::ship_deplacement() {
+void Data::ship_deplacement (bool & test) {
   Prometheus_.set_shape();
   reset();
   Prometheus_.Input_rot();
@@ -192,7 +277,7 @@ void Data::ship_deplacement() {
   }
 }
 
-void Data::planete_deplacement() {
+void Data::planete_deplacement (bool & test, Vecteur & Diff_de_ref) {
   Vecteur position_precedente(Prometheus_.position_());
   Vecteur position_vaisseau(1900/2 - Longueur_/2 ,1200/2 - Largeur_/2);
   Prometheus_.set_shape(position_vaisseau.x_(), position_vaisseau.y_());
@@ -208,55 +293,3 @@ void Data::planete_deplacement() {
     }
   }
 }
-
-double Data::n() {
-  return (n_);
-}
-
-//int t () const;
-//double R () const;
-//double M () const;
-//int Rmax () const;
-//int Rmin () const;
-int Data::Lx() {
-  return (Lx_);
-}
-
-int Data::Ly() {
-  return (Ly_);
-}
-
-//double h () const;
-//double Propulsion_Ar () const;
-//double Propulsion_Av () const;
-//double Propulsion_Lat () const;
-//double Propulsion_Rot () const;
-//double Masse () const;
-//int Largeur () const;
-//int Longueur () const;
-//Vecteur position_initial () const;
-//sf::Texture texture_vaisseau () const;
-sf::RectangleShape Data::Ship() {
-  return (Ship_);
-}
-
-Vaisseau Data::Prometheus() {
-  return (Prometheus_);
-}
-
-vector<CorpsStellaire> Data::list_objet() {
-  return (list_objet_);
-}
-
-vector<sf::CircleShape> Data::corps() {
-  return (corps_);
-}
-
-Text Data::game_over() {
-  return (game_over_);
-}
-
-int Data::Mode() {
-  return (mode_);
-}
-
