@@ -43,3 +43,4 @@ void Text::loading() {
   else if (c==2)
     text_.setColor(sf::Color::Black);
 }
+

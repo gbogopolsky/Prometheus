@@ -72,101 +72,101 @@ class Data {
 
   private:
     //Nombre d'objets
-
+    
     double n_;
 
     //Nombre de texture de planètes differentes
-
+    
     double t_;
 
     //Rayon d'un CorpsStellaire
-
+    
     double R_;
 
     //Masse d'un CorpsStellaire
-
+    
     double M_;
 
     //Rayon maximum d'un CorpsStellaire
-
+    
     double Rmax_;
 
     //Rayon minimum d'un CorpsStellaire
-
+    
     double Rmin_;
 
     //Taille de la fenêtre selon x
-
+    
     int Lx_;
 
     //Taille de la fenêtre seon y
-
+    
     int Ly_;
 
     //Paramètrage RK4 : intervalle de temps
-
+    
     double h_;
 
     //Propulsion arrière d'un Vaisseau
-
+    
     double Propulsion_Ar_;
 
     //Propulsion avant d'un Vaisseau
-
+    
     double Propulsion_Av_;
 
     //Propulsion laterale d'un Vaisseau
-
+    
     double Propulsion_Lat_;
 
     //Propulsion de rotation d'un Vaisseau
-
+    
     double Propulsion_Rot_;
 
     //Masse d'un Vaisseau
-
+    
     double Masse_;
 
     //Largeur d'un Vaisseau
-
+    
     int Largeur_;
 
     //Longueur d'un Vaisseau
-
+    
     int Longueur_;
 
     //Position initial du Vaisseau
-
+    
     Vecteur position_initial_;
 
     //Texture du vaisseau
-
+    
     sf::Texture texture_vaisseau_;
 
     //Forme du vaisseau
-
+    
     sf::RectangleShape Ship_;
 
     //vaisseau
-
+    
     Vaisseau Prometheus_;
 
     //Liste de CorpsStellaire (physique)
-
+    
     vector<CorpsStellaire> list_objet_;
 
     //Liste de CorpsStellaire (affichage)
-
+    
     vector<sf::CircleShape> corps_;
 
     //Police game over
-
+    
     Text game_over_;
 
     //Réglage du référentiel:
     //0 --> "référentiel" de l'univers
     //1 --> référentiel du vaisseau (pour la translation seulement)
-
+    
     int mode_;
 
 };
