@@ -1,3 +1,4 @@
+
 #include "Data.h"
 #include "CorpsStellaire.h"
 
@@ -176,7 +177,7 @@ void Data::set_mode() {
   }
 }
 
-void Data::ship_deplacement(bool & test) {
+void Data::ship_deplacement() {
   Prometheus_.set_shape();
   reset();
   Prometheus_.Input_rot();
@@ -191,7 +192,7 @@ void Data::ship_deplacement(bool & test) {
   }
 }
 
-void Data::planete_deplacement(bool & test, Vecteur & Diff_de_ref) {
+void Data::planete_deplacement() {
   Vecteur position_precedente(Prometheus_.position_());
   Vecteur position_vaisseau(1900/2 - Longueur_/2 ,1200/2 - Largeur_/2);
   Prometheus_.set_shape(position_vaisseau.x_(), position_vaisseau.y_());
@@ -258,3 +259,4 @@ Text Data::game_over() {
 int Data::Mode() {
   return (mode_);
 }
+
