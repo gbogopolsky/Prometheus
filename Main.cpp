@@ -15,6 +15,7 @@ int main() {
   game.create(sf::VideoMode(Parametres.Lx(), Parametres.Ly()), "The Game");
   Parametres.Texturage();
   Parametres.Game_Over();
+  int i = 0;
 
   do {
 
