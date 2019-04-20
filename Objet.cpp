@@ -56,7 +56,7 @@ void Objet::set_vitesse (Vecteur & Vect_) {
 }
 
 void Objet::set_texture (std::string nom_texture) {
-  texture.loadFromFile(nom_texture + ".png");
+  texture.loadFromFile("images/" + nom_texture + ".png");
 }
 
 double Objet::Distance (const Vecteur & Vecteur1, const Vecteur & Vecteur2) {
