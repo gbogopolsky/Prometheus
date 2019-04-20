@@ -8,11 +8,13 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <random>
 #include "Vecteur.h"
 #include "Objet.h"
 #include "Vaisseau.h"
 #include "CorpsStellaire.h"
 #include "PageSetting.h"
+
 
 using namespace std;
 
