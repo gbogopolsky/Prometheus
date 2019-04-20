@@ -10,9 +10,10 @@ bool Game (sf::RenderWindow & game_, sf::RenderWindow & param_, Vecteur Diff_de_
       sf::Event event;
 
       while (game_.pollEvent(event)) {
-          if (event.type == sf::Event::Closed)
+          if (event.type == sf::Event::Closed) {
               game_.close();
               end = false;
+          }
       };
 
       if(Continue) {
