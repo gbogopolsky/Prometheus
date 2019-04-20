@@ -40,3 +40,6 @@ sfml-app
 # Fichiers de référence
 rk4.cpp
 rk4_old.cpp
+
+**/build
+.vscode/
