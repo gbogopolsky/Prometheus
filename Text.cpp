@@ -19,7 +19,7 @@ sf::Text Text::text () {
 }
 
 void Text::loading_font (string nom_font) {
-  font_.loadFromFile(nom_font + ".ttf");
+  font_.loadFromFile("fonts/" + nom_font + ".ttf");
 }
 
 void Text::loading_text (string nom_text) {
