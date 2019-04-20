@@ -13,16 +13,20 @@ sf::CircleShape Prometheus(15);
 int main() {
   //creation du système
   Objet Vaisseau;
+
   //création d'un fichier de sortie des données et d'un compteur d'itérations
   std::ofstream outfile;
-  outfile.open("vaisseau.dat");
+  outfile.open("../vaisseau.dat");
+
   int iterations = 0;
   //temps d'une boucle (fps)
   sf::Time time = sf::milliseconds(10);
   double dTime = 0.010;
+
   // création de la fenêtre
   window.create(sf::VideoMode(800, 600), "My window");
   Prometheus.setFillColor(sf::Color(100, 250, 50));
+
   // on fait tourner le programme tant que la fenêtre n'a pas été fermée
   while (window.isOpen()) {
     //Chronometrage
@@ -45,12 +49,15 @@ int main() {
 
     Vaisseau.Euler(dTime);
     Prometheus.setPosition(Vaisseau.x_(), Vaisseau.y_());
-    window.draw(Prometheus);
 
     // c'est ici qu'on dessine tout
-      // fin de la frame courante, affichage de tout ce qu'on a dessiné
+    window.draw(Prometheus);
+
+    // fin de la frame courante, affichage de tout ce qu'on a dessiné
     iterations += 1;
     window.display();
+
+    // Wait for the next frame, in order to get a constant framerate, independent from the execution time
     sf::sleep(time - clock.getElapsedTime());
   }
   outfile.close();
