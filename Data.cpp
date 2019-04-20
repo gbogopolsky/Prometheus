@@ -180,7 +180,7 @@ void Data::corpsstellaire_generation (CorpsStellaire & CorpsStellaire_, sf::Circ
   int l = uniform_dist_t(e1);
   convert << l;
   m = convert.str();
-  fichier = "images/P" + m + ".png";
+  fichier = "../images/P" + m + ".png";
   texture.loadFromFile(fichier);
   M_ = 6e14*sqrt(R_);
   vx = 0;
