@@ -1,78 +1,64 @@
+#include <SFML/Graphics.hpp>
 #include <iostream>
+#include <string>
+#include <cmath>
+#include <vector>
 #include "Vecteur.h"
 #include "Objet.h"
-#include <SFML/Graphics.hpp>
 
-Objet::Objet (): position() , position_precedente() , acceleration(), vitesse(), vitesse_precedente() {}
 
-Objet::Objet (Vecteur position_,Vecteur position_precedente_, Vecteur acceleration_, Vecteur vitesse_, Vecteur vitesse_precedente_) {
-  position = position_;
-  position_precedente = position_precedente_;
-  acceleration = acceleration_;
+Objet::Objet () :
+  masse(),
+  vitesse(),
+  position(),
+  texture()
+{}
+
+Objet::Objet (const double masse_, const Vecteur vitesse_, const Vecteur position_, const sf::Texture texture_):
+  masse(masse_),
+  vitesse(vitesse_),
+  position(position_),
+  texture(texture_)
+{}
+
+void Objet::set_Objet (double & masse_, Vecteur & vitesse_, Vecteur & position_, sf::Texture & texture_) {
+  masse = masse_;
   vitesse = vitesse_;
-  vitesse_precedente = vitesse_precedente_;
+  position = position_;
+  texture = texture_;
 }
 
-void Objet::Acceleration () {
-  acceleration = Vecteur();
 
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-    acceleration += Vecteur(100.0, 0.);
-  }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-    acceleration -= Vecteur(100.0, 0.);
-  }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-    acceleration += Vecteur(0., 100.0);
-  }
-  if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-    acceleration -= Vecteur(0., 100.0);
-  }
+Vecteur Objet::position_ () const {
+  return position;
 }
 
-void Objet::Euler(double dTime) {
-  // Vecteur position_ = position;
-  // Vecteur vitesse_ = vitesse;
-  //std::cout << acceleration.x_() << std::endl;
-  //std::cout << acceleration.y_() << std::endl;
-  vitesse = vitesse + dTime*acceleration;
-  position = position + dTime*vitesse + 0.5*dTime*dTime*acceleration;
-  // position_precedente = position_;
-  // vitesse_precedente = vitesse_;
+double Objet::masse_ () const {
+  return masse;
 }
 
-Vecteur Objet::position_() const {
-  return (position);
+sf::Texture Objet::texture_ () const {
+  return texture;
 }
 
-double Objet::x_ () const {
-  return (position.x_());
+
+void Objet::set_position (Vecteur & Vect_) {
+  position = Vect_;
 }
 
-double Objet::y_ () const {
-  return (position.y_());
+void Objet::set_position (double x, double y) {
+  position.set_x(x);
+  position.set_y(y);
 }
 
-double Objet::vitesse_x () const {
-  return vitesse.x_();
+void Objet::set_vitesse (Vecteur & Vect_) {
+  vitesse = Vect_;
 }
 
-double Objet::vitesse_y () const {
-  return vitesse.y_();
+void Objet::set_texture (std::string nom_texture) {
+  texture.loadFromFile("../images/" + nom_texture + ".png");
 }
 
-double Objet::acceleration_x () const {
-  return acceleration.x_();
-}
-
-double Objet::acceleration_y () const {
-  return acceleration.y_();
-}
-
-void Objet::affiche_acceleration_x (double x) {
-  std::cout << x << std::endl;
-}
-
-void Objet::affiche_acceleration_y (double y) {
-  std::cout << y << std::endl;
+double Objet::Distance (const Vecteur & Vecteur1, const Vecteur & Vecteur2) {
+  return sqrt(pow(Vecteur1.y_() - Vecteur2.y_(),2) + pow((Vecteur1.x_() - Vecteur2.x_()),2));
 }

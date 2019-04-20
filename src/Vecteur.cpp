@@ -13,6 +13,14 @@ double Vecteur::y_ () const {
   return y;
 }
 
+void Vecteur::set_x (double x_) {
+  x = x_;
+}
+
+void Vecteur::set_y (double y_) {
+  y = y_;
+}
+
 Vecteur & Vecteur::operator += (const Vecteur & vecteur_) {
   x += vecteur_.x_();
   y += vecteur_.y_();
@@ -43,6 +51,10 @@ Vecteur operator - (const Vecteur & Vecteur1, const Vecteur & Vecteur2) {
 
 Vecteur operator * (const double dt_, const Vecteur & vecteur_) {
   return Vecteur(dt_*vecteur_.x_(), dt_*vecteur_.y_());
+}
+
+Vecteur operator / (const Vecteur & vecteur_, const double dt_) {
+  return Vecteur(vecteur_.x_()/dt_, vecteur_.y_()/dt_);
 }
 
 void affiche_x (Vecteur vecteur_) {

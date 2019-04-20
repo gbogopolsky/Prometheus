@@ -1,35 +1,32 @@
 #ifndef Objet_h
 #define Objet_h
+#include <SFML/Graphics.hpp>
+#include <vector>
+#include <string>
 #include "Vecteur.h"
-
 
 class Objet {
 public:
-  Objet();
-  Objet(Vecteur position_, Vecteur position_precedente_, Vecteur acceleration_, Vecteur vitesse_, Vecteur vitesse_precedente_);
-
-  void Acceleration ();
-  void Euler (double dTime);
+  Objet ();
+  Objet (const double masse_, const Vecteur vitesse_, const Vecteur position_, const sf::Texture texture_);
 
   Vecteur position_ () const;
-  double x_ () const;
-  double y_ () const;
-  //Vecteur acceleration_ () const;
-  double vitesse_x () const;
-  double vitesse_y () const;
-  double acceleration_x () const;
-  double acceleration_y () const;
+  double masse_ () const;
+  sf::Texture texture_ () const;
 
-  void affiche_acceleration_x (double x);
-  void affiche_acceleration_y (double y);
+  void set_position (Vecteur & Vect_);
+  void set_position (double x, double y);
+  void set_vitesse (Vecteur & Vect_);
+  void set_texture (std::string nom_texture);
+  void set_Objet (double & masse_, Vecteur & vitesse_, Vecteur & position_, sf::Texture & texture_);
 
-private:
-  Vecteur position;
-  Vecteur position_precedente;
-  Vecteur acceleration;
+  double Distance (const Vecteur & Vecteur1, const Vecteur & Vecteur2);
+
+protected:
+  double masse;
   Vecteur vitesse;
-  Vecteur vitesse_precedente;
-
+  Vecteur position;
+  sf::Texture texture;
 };
 
 #endif
